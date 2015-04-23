@@ -3,9 +3,12 @@ class HomeController < ApplicationController
   require 'open-uri'
   require 'json'
 
+  def home
+
+  # use get request to retrieve JSON api information from NYT, Meetup & Indeed
   get_groups = 'http://api.meetup.com...'
   groups_params = user.interest  #this should be extracted to be a global variable
-  url = "#{get_groups}#whatever other parameters to include in the url (also make sure to limit the number of records returned)"
+  url = "#{get_groups}   #whatever other parameters to include in , url (also make sure to limit the number of records returned)"
   # now get the contents of the url
   groups_data = open(url).read
   # now parse and put into an array (shown below)
@@ -17,6 +20,10 @@ class HomeController < ApplicationController
 
 
   get_jobs
+
+
+
+  end
 
 
 end

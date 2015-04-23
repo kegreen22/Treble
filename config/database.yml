@@ -24,6 +24,10 @@ default: &default
 development:
   <<: *default
   database: Treble_development
+  host: localhost
+  pool: 5
+  username: treble
+  password: madrid7A
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -58,6 +62,10 @@ development:
 test:
   <<: *default
   database: Treble_test
+  host: localhost
+  pool: 5
+  username: treble
+  password: madrid7A
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,5 +89,8 @@ test:
 production:
   <<: *default
   database: Treble_production
-  username: Treble
-  password: <%= ENV['TREBLE_DATABASE_PASSWORD'] %>
+  username: treble
+  password: madrid7A
+
+  # username: Treble
+  # password: <%= ENV['TREBLE_DATABASE_PASSWORD'] %>
