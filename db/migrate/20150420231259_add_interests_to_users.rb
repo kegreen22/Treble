@@ -6,8 +6,7 @@ class AddInterestsToUsers < ActiveRecord::Migration
     add_column :users, :zipcode, :string
     add_column :users, :interest1, :string
     add_column :users, :interest2, :string
-    add_column :users, :interest3, :string
-
+    
     add_column :users, :password_digest, :string
     add_column :users, :slug, :string
 
