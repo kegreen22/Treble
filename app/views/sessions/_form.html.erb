@@ -11,24 +11,6 @@
 <%= password_field_tag :password, params[:password] || '' %>
 </div>
  
-<div class="control-group">
-<%= label_tag :city %>
-<%= text_field_tag :city, params[:city] || '' %>
-
-<%= label_tag :state %>
-<%= text_field_tag :state, params[:state] || '' %>
-
-</div>
-
-<div class="control-group">
-<%= label_tag :first_interest %>
-
-<%= label_tag :second_interest %>
-
-
-</div>
-
-
 
 
 <%= submit_tag 'login', class: "btn btn-success"  %>
