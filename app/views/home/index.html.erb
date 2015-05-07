@@ -12,7 +12,29 @@
     <% else %>
 <span>
 <h3>Welcome <%= current_user.username %> </h3>
+<h4>The weather at <%= user.city %>, <%= user_state %> is currently <%= current_user.weather %></h4>
 
+<div role='tabpanel'>
+  <ul class='nav nav tabs' role='tablist'>
+    <li role='news' class='active'><a aria-controls='news' role='tab' data-toggle='tab'>News</li>
+    <li role='networking'><a aria-controls='networking' role='tab' data-toggle='tab'>Networking Opportunities</li>
+  </ul>
+
+<div class='tab-content'>
+  <div role="news" class='tab-pane active' id='news'>
+
+  </div>
+
+  <div role='networking' class='tab-pane' id='networking'>
+
+
+  </div>
+
+
+</div>
+
+
+</div>
 
 
 

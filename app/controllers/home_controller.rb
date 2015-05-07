@@ -10,32 +10,13 @@ class HomeController < ApplicationController
   @interest2 = User.interest2
   @zipcode = User.zipcode
   # call api methods and insert interest into api call
-
+  @weather_final = weather_rpt
   @nytimes_final = nytimes
   @meetup_final = meetup
-  weather_rpt
-
+ 
 # view displays the api results
 
-
-
-  # use get request to retrieve JSON api information from NYT, Meetup & Indeed
-  get_groups = 'http://api.meetup.com...'
-  groups_params = user.interest  #this should be extracted to be a global variable
-  url = "#{get_groups}   #whatever other parameters to include in , url (also make sure to limit the number of records returned)"
-  # now get the contents of the url
-  groups_data = open(url).read
-  # now parse and put into an array (shown below)
-  groups_result = JSON.parse(groups_data)
-
-
-  get_news
-
-
-
-  get_jobs
-
-  end
+   end
 
 
   private
@@ -71,6 +52,8 @@ class HomeController < ApplicationController
   end
 
   def weather_rpt
+    @user_state = User.state
+    @user_city = User.city
     url = "http://api.wunderground.com/api/cfffe9ffeb7b662e/conditions/q/" + User.state + "/" + User.city + ".json"
     weather_data = open(url).read
     weather_result = JSON.parse(weather_data)
