@@ -1,0 +1,19 @@
+
+<% if !logged_in? %>
+</div class='top_space'>
+<div class='main_space' class='jumbotron'>
+  <h1>Welcome to Treble!</h1>
+</p>
+<p><%= button_to "Sign up if you're new", class="btn btn-primary btn-lg", action: "register_path" %></p>
+<p><%= button_to "Login", class="btn btn-primary btn-lg", action: "login_path" %>
+  </div>
+  <div class='bottom_space'>
+
+    <% else %>
+<span>
+<h3>Welcome <%= current_user.username %> </h3>
+
+
+
+
+  <% end %>

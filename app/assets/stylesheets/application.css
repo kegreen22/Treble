@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+.top_space {position: fixed; top: 5px; width: 100%; height: 100px; text-align: center;}
+.bottom_space
+.main_space
