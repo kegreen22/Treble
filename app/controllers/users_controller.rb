@@ -41,7 +41,7 @@ end
  
 
 def user_params # allow whitelist through
-  params.require(:user).permit(:username, :password, :city, :state, :zipcode, :interest1, :interest2)
+  params.require(:user).permit(:username, :password, :city, :state, :zipcode, :interest1, :interest2, :free_time)
 end
  
 def set_user

@@ -11,8 +11,8 @@
 
     <% else %>
 <span>
-<h3>Welcome <%= current_user.username %> </h3>
-<h4>The weather at <%= user.city %>, <%= user_state %> is currently <%= current_user.weather %></h4>
+<h3>Welcome <%= @user.username %> </h3>
+<h4>The weather at <%= @user.city %>, <%= @user_state %> is currently <%= current_user.weather %></h4>
 
 <div role='tabpanel'>
   <ul class='nav nav tabs' role='tablist'>
