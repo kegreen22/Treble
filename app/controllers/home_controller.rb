@@ -15,7 +15,7 @@ class HomeController < ApplicationController
   @nytimes_data = data_retrieve("http://api.nytimes.com/svc/search/v2/articlesearch.json?&q=" + User.interest1 "+" + User.interest2 + "&sort=newest&api-key=bd2d3da37f58e2247ab30155400fc222:3:67128716")
   @weather_rpt = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/conditions/q/" + User.state + "/" + User.city + ".json")
   @meetup_data = data_retrieve("https://api.meetup.com/2/open_events.zip=" + User.zipcode + "&text=" + User.interest1 + "+" + User.interest2 + "&time=,1m&key=6874237675483c4f5e12f416939655a")
-  @nytimes_top = data_retrieve("http://api.nytimes.com/svc/topstories/v1/home.[response-format]?api-key={your-api-key}")
+  @nytimes_top = data_retrieve("http://api.nytimes.com/svc/topstories/v1/home.json?api-key=799bb4a946ced430d7d8611ca957387b:8:67128716")
   @nytimes_events = data_retrieve("http://api.nytimes.com/svc/events/v2/listings.json?&query=" + User.free_time + "&api-key=3484b827fcc7f7a5962abbf4b36fdfc4:19:67128716")
 
   # check if any results are empty or nil and if so assign a string
@@ -23,7 +23,7 @@ class HomeController < ApplicationController
   @weather_rpt.empty? ? @weather_rpt = "No weather information at this time" : @weather_rpt
   @meetup_data.empty? ? @meetup_data = "No information on meetup groups" : @nmeetup_data
   @nytimes_top.empty? ? @nytimes_top = "Unable to retrieve top stories at this time" : @nytimes_top
-  @nytimes_events.empty? ? @nytimes_events = "No information on local events meeting your free time interests" : @nytimes_events
+  @nytimes_events.empty? ? @nytimes_events = "No information on local events meeting your free time interest" : @nytimes_events
 
   # @weather_final = weather_rpt
   # @nytimes_final = nytimes

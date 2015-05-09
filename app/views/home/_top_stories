@@ -1,0 +1,32 @@
+<table id="locations" class ="table1" cellspacing="0" width="100%">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Title</th>
+    <th>Link</th>
+    <th>Phone Number</th>
+    <th>Notes</th>
+  </tr>
+  </thead>
+
+<body>
+  <tr>
+    <% @top_stories.each do |key, value| %>
+      <td><%= resource.activity %></td>
+      <td><%= resource.name %></td>
+      <td><%= link_to resource.address, resource.address_w_zip, target: "_blank" %></td>
+      <td><%= resource.phone %></td>
+      <td><%= resource.notes %></td>
+    </tr>
+    <% end %>
+  </body>
+</table>
+
+
+h.each do |key, value|
+puts key
+value.each do |k,v|
+  puts k
+  puts v
+  end
+end
