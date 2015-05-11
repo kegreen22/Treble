@@ -28,7 +28,7 @@ class HomeController < ApplicationController
 
   # assign json array info to variables
   # Top stories
-  @top_title = @nytimes_top["results"]["title"[] ; with title being the link_to to the 'url'; 
+  @top_title = @nytimes_top["results"]["title"] # with title being the link_to to the 'url'; 
   @top_url = @nytimes_top["results"]["url"]
   @top_date = @nytimes_top["results"]["last_updated"]
   # col headers - date, title
@@ -36,7 +36,8 @@ class HomeController < ApplicationController
   # Article search
   # response:{ docs: ['headline']["main"] using 'web_url' as the link_to parameter; pub_date
   @headline = @vnytimes_data["response"]["docs"]["headline"]["main"]
-  @art_date = @nytimes_data["pub_date"]
+  @art_date = @nytimes_data["response"]["docs"]["pub_date"]
+  @art_url = @nytimes_data["response"]["docs"]["web_url"]
   # col headers - date, headline (with web_url as link_to)
 
   # Events

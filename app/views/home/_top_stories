@@ -11,7 +11,7 @@
 
 <body>
   <tr>
-    <% @top_stories.each do |key, value| %>
+    <% @nytimes _top.each do |results, value1| %>
       <td><%= resource.activity %></td>
       <td><%= resource.name %></td>
       <td><%= link_to resource.address, resource.address_w_zip, target: "_blank" %></td>
