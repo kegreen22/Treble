@@ -18,12 +18,31 @@ class HomeController < ApplicationController
   @nytimes_top = data_retrieve("http://api.nytimes.com/svc/topstories/v1/home.json?api-key=799bb4a946ced430d7d8611ca957387b:8:67128716")
   @nytimes_events = data_retrieve("http://api.nytimes.com/svc/events/v2/listings.json?&query=" + User.free_time + "&api-key=3484b827fcc7f7a5962abbf4b36fdfc4:19:67128716")
 
-  # check if any results are empty or nil and if so assign a string
+  # check if any results are empty or nil and if so assign a default string
   @nytimes_data.empty? ? @nytimes_data = "No news on your interests at this time" : @nytimes_data
   @weather_rpt.empty? ? @weather_rpt = "No weather information at this time" : @weather_rpt
   @meetup_data.empty? ? @meetup_data = "No information on meetup groups" : @nmeetup_data
   @nytimes_top.empty? ? @nytimes_top = "Unable to retrieve top stories at this time" : @nytimes_top
   @nytimes_events.empty? ? @nytimes_events = "No information on local events meeting your free time interest" : @nytimes_events
+
+
+  # assign json array info to variables
+  # Top stories
+  @top_title = @nytimes_top["results"]["title"[] ; with title being the link_to to the 'url'; 
+  @top_url = @nytimes_top["results"]["url"]
+  @top_date = @nytimes_top["results"]["last_updated"]
+  # col headers - date, title
+
+  # Article search
+  # response:{ docs: ['headline']["main"] using 'web_url' as the link_to parameter; pub_date
+  @headline = @vnytimes_data["response"]["docs"]["headline"]["main"]
+  @art_date = @nytimes_data["pub_date"]
+  # col headers - date, headline (with web_url as link_to)
+
+  # Events
+  # event_date_list, event_detail_url as a link_to, event_name, web_description
+  @events = @nytimes_events["event_date_list"]["event_detail_url"]
+  # col headers - date, event (event_name w/ url), description
 
   # @weather_final = weather_rpt
   # @nytimes_final = nytimes
