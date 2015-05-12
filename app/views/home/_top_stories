@@ -3,30 +3,21 @@
   <tr>
     <th>Date</th>
     <th>Title</th>
-    <th>Link</th>
-    <th>Phone Number</th>
-    <th>Notes</th>
   </tr>
   </thead>
 
 <body>
   <tr>
-    <% @nytimes _top.each do |results, value1| %>
-      <td><%= resource.activity %></td>
-      <td><%= resource.name %></td>
-      <td><%= link_to resource.address, resource.address_w_zip, target: "_blank" %></td>
-      <td><%= resource.phone %></td>
-      <td><%= resource.notes %></td>
-    </tr>
+    <% @top_date.each do |date| %>
+      <td><%= @top.date %></td>
+      <% @top_url.each do |url| %>
+      <% @top_title.each do |title| %>
+      <td><%= link_to @top_url, @top_title, target: "_blank" %></td>
+      </tr>
+    <% end %>
+    <% end %>
     <% end %>
   </body>
 </table>
 
 
-h.each do |key, value|
-puts key
-value.each do |k,v|
-  puts k
-  puts v
-  end
-end
