@@ -2,14 +2,14 @@
   <thead>
   <tr>
     <th>Date</th>
-    <th>Article Title</th>
+    <th>Top Stories</th>
   </tr>
   </thead>
 
 <body>
   <tr>
     <% @top_date.each do |date| %>
-      <td><%= @top.date %></td>
+      <td><%= @top_date %></td>
       <% @top_url.each do |url| %>
       <% @top_title.each do |title| %>
       <td><%= link_to @top_url, @top_title, target: "_blank" %></td>

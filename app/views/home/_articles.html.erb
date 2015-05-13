@@ -1,0 +1,23 @@
+<table id="locations" class ="table1" cellspacing="0" width="100%">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th><%= "Articles based on your interest -" + User.interest %></th>
+  </tr>
+  </thead>
+
+<body>
+  <tr>
+    <% @art_date.each do |date| %>
+      <td><%= @art_date %></td>
+      <% @art_url.each do |url| %>
+      <% @headline.each do |headline| %>
+      <td><%= link_to @art_url, @headline, target: "_blank" %></td>
+      </tr>
+    <% end %>
+    <% end %>
+    <% end %>
+  </body>
+</table>
+
+

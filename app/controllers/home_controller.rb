@@ -7,11 +7,11 @@ class HomeController < ApplicationController
 
   # get user interest from the database
   interest_pre = User.interest1
-  @interest1 = interest_pre.gsub(' ','+') # add + symbol to allow use in http searches - designates "or" in the article searches
+  @interest1 = interest_pre.gsub(' ','+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the article searches
   @zipcode = User.zipcode
 
-  free_pre = User.free_time  # add + symbol to allow use in http searches - designates "or" in the events searches
-  @free_time = free_pre.gsub(' ', '+')
+  free_pre = User.free_time  
+  @free_time = free_pre.gsub(' ', '+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the event searches
   
   # call api methods and insert interest into api call
 
