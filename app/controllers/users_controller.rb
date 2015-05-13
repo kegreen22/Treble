@@ -11,7 +11,7 @@ def create
   @user = User.new(user_params)
  
   if @user.save
-  flash[:notice] = "Your information has been saved. Welcome to Treble!"
+  flash[:notice] = "Your user information has been saved. Welcome to Treble!"
   session[:user_id] = @user.id
   # now automatically log user into the site after their registration
   redirect_to root_path
@@ -41,7 +41,7 @@ end
  
 
 def user_params # allow whitelist through
-  params.require(:user).permit(:username, :password, :city, :state, :zipcode, :interest1, :interest2, :free_time)
+  params.require(:user).permit(:username, :password, :city, :state, :zipcode, :interest1, :free_time)
 end
  
 def set_user

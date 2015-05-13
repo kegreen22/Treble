@@ -11,33 +11,24 @@
 
     <% else %>
 <span>
-<h3>Welcome <%= @user.username %> </h3>
-<h4>The weather at <%= @user.city %>, <%= @user_state %> is currently <%= current_user.weather %></h4>
+  <div class='well'>
+  <h3>Welcome <%= @user.username %> </h3>
+<h4>The weather at <%= @user.city %>, <%= @user_state %> is currently <%= @weather_rpt %></h4>
+</div>
 
-<div role='tabpanel'>
+ <div role='tabpanel'>
   <ul class='nav nav tabs' role='tablist'>
-    <top stories>
-    <li role='news' class='active'><a aria-controls='news' role='tab' data-toggle='tab'>News</li>
-    <li role='networking'><a aria-controls='networking' role='tab' data-toggle='tab'>Networking Opportunities</li>
-    <local events>
+    <li class= "active"><%= render 'top_stories' %><span class="glyphicon glyphicon-globe"></span>Top Stories</li>
+    <li role='news'> <%= render 'articles' %><span class="glyphicon glyphicon-briefcase"></span>News on your interests</li>
+    <li role='networking'><%= render 'networking' %><span class="glyphicon glyphicon-thumbs-up"></span>Meetup Networking Opportunities</li>
+    <li role='events'><%= render 'events' %><span class="glyphicon glyphicon-heart"> </span> Events for your free time</li>
   </ul>
 
-<div class='tab-content'>
-  <div role="news" class='tab-pane active' id='news'>
-
-  </div>
-
-  <div role='networking' class='tab-pane' id='networking'>
-
-
-  </div>
-
-
 </div>
 
 
 </div>
-
 
 
   <% end %>
+

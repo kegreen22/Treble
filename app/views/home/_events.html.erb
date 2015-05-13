@@ -11,11 +11,11 @@
   <tr>
       <% @events_url.each do |url| %>
         <% @events_name.each do |name| %>
-           <td><%= link_to @events_url, @events_name, target: "_blank" %></td>
+           <td><%= link_to url, name, target: "_blank" %></td>
             <% @events_desc.each do |description| %>
-            <td><%= @events_desc %></td>
+            <td><%= description %></td>
             <% @events_free.each do |free| %>
-            <td><%= @events_free %></td>
+            <td><%= free %></td>
       </tr>
       <% end %>
     <% end %>

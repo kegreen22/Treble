@@ -27,8 +27,8 @@
 <div class="control-group">
 <%= label_tag :first_interest %>
 <%= text_field_tag :first_interest, params[:first_interest] ||| '' %>
-<%= label_tag :second_interest %>
-<%= text_field_tag :second_interest, params[:second_interest] ||| '' %>
+<%= label_tag :free_time %>
+<%= text_field_tag :free_time, params[:free_time] ||| '' %>
 </dvi>
 
 <%= f.submit (@user.new_record? ? "Register" : "Update Profile"), class: "btn btn-success"  %>

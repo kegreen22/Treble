@@ -9,10 +9,10 @@
 <body>
   <tr>
     <% @art_date.each do |date| %>
-      <td><%= @art_date %></td>
+      <td><%= date %></td>
       <% @art_url.each do |url| %>
       <% @headline.each do |headline| %>
-      <td><%= link_to @art_url, @headline, target: "_blank" %></td>
+      <td><%= link_to url, headline, target: "_blank" %></td>
       </tr>
     <% end %>
     <% end %>
