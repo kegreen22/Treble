@@ -18,7 +18,7 @@ class HomeController < ApplicationController
   @nytimes_data = data_retrieve("http://api.nytimes.com/svc/search/v2/articlesearch.json?&q=" + @interest1 + "&sort=newest&api-key=bd2d3da37f58e2247ab30155400fc222:3:67128716")
   @weather_rpt = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/conditions/q/" + User.state + "/" + User.city + ".json")
   @weather_forecast = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/forecast/q/" + User.state + "/" + User.city + ".json")
-  @meetup_data = data_retrieve("https://api.meetup.com/2/open_events.zip=" + User.zipcode + "&text=" + @interest1 + "&time=,1m&key=6874237675483c4f5e12f416939655a")
+  @meetup_data = data_retrieve("https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=" + User.zipcode + "&text=" + @interest1 + "&page=20&key=6874237675483c4f5e12f416939655a")
   @nytimes_top = data_retrieve("http://api.nytimes.com/svc/topstories/v1/home.json?api-key=799bb4a946ced430d7d8611ca957387b:8:67128716")
   @nytimes_events = data_retrieve("http://api.nytimes.com/svc/events/v2/listings.json?&query=" + @free_time + "&api-key=3484b827fcc7f7a5962abbf4b36fdfc4:19:67128716")
 
@@ -58,6 +58,13 @@ class HomeController < ApplicationController
 
 
   def networking
+    @meetup_grpname = @meetup_data["results"]["group"]["name"]
+    @meetup_locname = @meetup_data["results"]["venue"]["name"]
+    @meetup_address = @meetup_data["results"]["venue"]["address1"]
+    @meetup_city = @meetup_data["results"]["venue"]["city"]
+    @meetup_desc = @meetup_data["results"]["name"]
+    @meetup_url = @meetup_data["results"]["event_url"]
+    @meetup_status = @meetup_data["results"]["status"]
 
   end
 

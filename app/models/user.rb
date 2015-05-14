@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   has_secure_password validations: false
   validates :username, presence: true, uniqueness: true
   validates :password, presence: true, on: :create, length: {minimum: 5}
-  validates :interest1, :city, :state, :zipcode, :free_time, presence: true, on: :create
-  
+  validates :interest1, :city, :state, :free_time, presence: true, on: :create
+  validates :zip_code, presence: true, length: {minimum: 5}, numericality: true
 
   before_save :generate_slug
 

@@ -1,0 +1,28 @@
+<table id="locations" class ="table1" cellspacing="0" width="100%">
+  <thead>
+  <tr>
+    <th><%= "Meetup events based on your interest -" + User.interest1 %></th>
+    <th>Meetup Group Name</th>
+    <th>Description</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+
+<body>
+  <tr>
+      <% @meetup_grpname.each do |name| %>
+        <td> <%= name %></td>
+        <% @meetup_url.each do |url| %>
+        <% @meetup_desc.each do |description| %>
+           <td><%= link_to url, description, target: "_blank" %></td>
+            <% @meetup_status.each do |status| %>
+            <td><%= status %></td>
+        </tr>
+      <% end %>
+    <% end %>
+    <% end %>
+    <% end %>
+  </body>
+</table>
+
+
