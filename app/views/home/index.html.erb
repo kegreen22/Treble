@@ -18,10 +18,10 @@
 
  <div role='tabpanel'>
   <ul class='nav nav tabs' role='tablist'>
-    <li class= "active"><%= render 'top_stories' %><span class="glyphicon glyphicon-globe"></span>Top Stories</li>
-    <li role='news'> <%= render 'articles' %><span class="glyphicon glyphicon-briefcase"></span>News on your interests</li>
-    <li role='networking'><%= render 'networking' %><span class="glyphicon glyphicon-thumbs-up"></span>Meetup Networking Opportunities</li>
-    <li role='events'><%= render 'events' %><span class="glyphicon glyphicon-heart"> </span> Events for your free time</li>
+    <li class= "active"><%= link_to "Top Stories", top_stories %><span class="glyphicon glyphicon-globe"></span></li>
+    <li role='news'> <%= link_to "News on your interests", articles %><span class="glyphicon glyphicon-briefcase"></span></li>
+    <li role='networking'><%= link_to "Meetup Networking Opportunities", networking %><span class="glyphicon glyphicon-thumbs-up"></span></li>
+    <li role='events'><%= link_to "Events for your free time", events %><span class="glyphicon glyphicon-heart"> </span></li>
   </ul>
 
 </div>
