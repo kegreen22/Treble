@@ -17,39 +17,59 @@ class HomeController < ApplicationController
 
   @nytimes_data = data_retrieve("http://api.nytimes.com/svc/search/v2/articlesearch.json?&q=" + @interest1 + "&sort=newest&api-key=bd2d3da37f58e2247ab30155400fc222:3:67128716")
   @weather_rpt = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/conditions/q/" + User.state + "/" + User.city + ".json")
+  @weather_forecast = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/forecast/q/" + User.state + "/" + User.city + ".json")
   @meetup_data = data_retrieve("https://api.meetup.com/2/open_events.zip=" + User.zipcode + "&text=" + @interest1 + "&time=,1m&key=6874237675483c4f5e12f416939655a")
   @nytimes_top = data_retrieve("http://api.nytimes.com/svc/topstories/v1/home.json?api-key=799bb4a946ced430d7d8611ca957387b:8:67128716")
   @nytimes_events = data_retrieve("http://api.nytimes.com/svc/events/v2/listings.json?&query=" + @free_time + "&api-key=3484b827fcc7f7a5962abbf4b36fdfc4:19:67128716")
 
   # check if any results are empty or nil and if so assign a default string
   @nytimes_data.empty? ? @nytimes_data = "No news on your interests at this time" : @nytimes_data
-  @weather_rpt.empty? ? @weather_rpt = "No weather information at this time" : @weather_rpt
+  @weather_rpt.empty? ? @weather_rpt = "No current weather information at this time" : @weather_rpt
+  @weather_forecast.empty? ? @weather_forecast = "No weather forecast information at this time" : @weather_forecast
   @meetup_data.empty? ? @meetup_data = "No information on meetup groups" : @nmeetup_data
   @nytimes_top.empty? ? @nytimes_top = "Unable to retrieve top stories at this time" : @nytimes_top
   @nytimes_events.empty? ? @nytimes_events = "No information on local events meeting your free time interest" : @nytimes_events
 
+  @weather_current = @weather_rpt['current_observation']["temperature_string"]
+  @weather_wind = @weather_rpt['current_observation']["wind_string"]
+  @weather_humidity = @weather_rpt['current_observation']["relative_humidity"]
+  @weather_feels = @weather_rpt['current_observation']["feelslike_string"]
+
+  @weather_ftext = @weather_forecast["forecast"]["txt_forecast"]["forecastday"]["fcttext"]
+  @weather_day = @weather_forecast["forecast"]["txt_forecast"]["forecastday"]["title"]
+  # @weather_fnextdaytext = []
+
 
   # assign json array info to variables
-  # Top stories
-  @top_title = @nytimes_top["results"]["title"] # with title being the link_to to the 'url'; 
-  @top_url = @nytimes_top["results"]["url"]
-  @top_date = @nytimes_top["results"]["last_updated"]
-  # col headers - date, title
+  
+  
+  def top_stories   # Top stories
+    @top_title = @nytimes_top["results"]["title"] # with title being the link_to to the 'url'; 
+    @top_url = @nytimes_top["results"]["url"]
+    @top_date = @nytimes_top["results"]["last_updated"]
+  end
 
-  # Article search
-  # response:{ docs: ['headline']["main"] using 'web_url' as the link_to parameter; pub_date
-  @headline = @vnytimes_data["response"]["docs"]["headline"]["main"]
-  @art_date = @nytimes_data["response"]["docs"]["pub_date"]
-  @art_url = @nytimes_data["response"]["docs"]["web_url"]
-  # col headers - date, headline (with web_url as link_to)
 
-  # Events
-  # event_date_list, event_detail_url as a link_to, event_name, web_description
-  @events_desc = @nytimes_events["results"]["web_description"]  # description of event
-  @events_name = @nytimes_events["results"]["event_name"]
-  # @events_date = @nytimes_events["results"][""]
-  @events_url = @nytimes_events["results"]["event_detail_url"]
-  @events_free = @nytimes_events["results"]["free"]
+  def articles    # Article search
+    @headline = @vnytimes_data["response"]["docs"]["headline"]["main"]
+    @art_date = @nytimes_data["response"]["docs"]["pub_date"]
+    @art_url = @nytimes_data["response"]["docs"]["web_url"]
+  end
+
+
+  def networking
+
+  end
+
+
+  def events   # Events
+    @events_desc = @nytimes_events["results"]["web_description"]  # description of event
+    @events_name = @nytimes_events["results"]["event_name"]
+    # @events_date = @nytimes_events["results"][""]
+    @events_url = @nytimes_events["results"]["event_detail_url"]
+    @events_free = @nytimes_events["results"]["free"]
+  end
+
 
   # Meetup search
   

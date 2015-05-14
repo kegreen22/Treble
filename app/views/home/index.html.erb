@@ -13,15 +13,38 @@
 <span>
   <div class='well'>
   <h3>Welcome <%= @user.username %> </h3>
-<h4>The weather at <%= @user.city %>, <%= @user_state %> is currently <%= @weather_rpt %></h4>
+<h4>The weather at <%= @user.city + ", " %> <%= @user_state %> is currently <%= @weather_current %>.</h4>
+<br>
+<h4>The weather forecast is: </h4>
+
+<table id="locations" class ="table1" cellspacing="0" width="100%">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Forecast</th>
+  </tr>
+  </thead>
+
+<body>
+  <tr>
+    <% @weather_day.each do |date| %>
+      <td><%= date %></td>
+      <% @weather_ftext.each do |weather_cast| %>
+      <td> <%= weather_cast %>
+  </tr>
+    <% end %>
+    <% end %>
+  </body>
+</table>
+
 </div>
 
  <div role='tabpanel'>
   <ul class='nav nav tabs' role='tablist'>
-    <li class= "active"><%= link_to "Top Stories", top_stories %><span class="glyphicon glyphicon-globe"></span></li>
-    <li role='news'> <%= link_to "News on your interests", articles %><span class="glyphicon glyphicon-briefcase"></span></li>
-    <li role='networking'><%= link_to "Meetup Networking Opportunities", networking %><span class="glyphicon glyphicon-thumbs-up"></span></li>
-    <li role='events'><%= link_to "Events for your free time", events %><span class="glyphicon glyphicon-heart"> </span></li>
+    <li class= "active"><%= link_to "Top Stories", controller: "home", action: "top_stories" %><span class="glyphicon glyphicon-globe"></span></li>
+    <li role='news'> <%= link_to "News on your interests", controller: "home", action: "articles" %><span class="glyphicon glyphicon-briefcase"></span></li>
+    <li role='networking'><%= link_to "Meetup Networking Opportunities", controller: "home", action: "networking" %><span class="glyphicon glyphicon-thumbs-up"></span></li>
+    <li role='events'><%= link_to "Events for your free time", controller: "home", action: "events" %><span class="glyphicon glyphicon-heart"> </span></li>
   </ul>
 
 </div>
