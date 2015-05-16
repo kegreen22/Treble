@@ -4,12 +4,19 @@
 <div class='main_space' class='jumbotron'>
   <h1>Welcome to Treble!</h1>
 </p>
-<p><%= button_to "Sign up if you're new", class="btn btn-primary btn-lg", action: "register_path" %></p>
-<p><%= button_to "Login", class="btn btn-primary btn-lg", action: "login_path" %>
+<p><%= link_to "Sign up if you're new", register_path %></p>
+<p><%= link_to "Sign in", login_path %></p>
   </div>
   <div class='bottom_space'>
 
     <% else %>
+    <ul class='dropdown-menu'>
+    <li>
+    <%= link_to edit_user_path(current_user) do %> <i class="icon-pencil"></i>Edit Profile<% end %>
+    <%= link_to user_path(current_user) do %> <i class="icon icon-home"></i>View Profile<% end %>
+    <%= link_to logout_path do %> <i class="icon icon-user"> </i>Logout<% end %>
+    </li>
+</ul> 
 <span>
   <div class='well'>
   <h3>Welcome <%= @user.username %> </h3>
