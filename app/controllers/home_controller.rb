@@ -23,14 +23,13 @@ class HomeController < ApplicationController
   @nytimes_events = data_retrieve("http://api.nytimes.com/svc/events/v2/listings.json?&query=" + @free_time + "&api-key=3484b827fcc7f7a5962abbf4b36fdfc4:19:67128716")
 
   # check if any results are empty or nil and if so assign a default string
-  @nytimes_data.empty? ? @nytimes_data = "No news on your interests at this time" : @nytimes_data
-  @weather_rpt.empty? ? @weather_rpt = "No current weather information at this time" : @weather_rpt
-  @weather_forecast.empty? ? @weather_forecast = "No weather forecast information at this time" : @weather_forecast
-  @meetup_data.empty? ? @meetup_data = "No information on meetup groups" : @nmeetup_data
-  @nytimes_top.empty? ? @nytimes_top = "Unable to retrieve top stories at this time" : @nytimes_top
-  @nytimes_events.empty? ? @nytimes_events = "No information on local events meeting your free time interest" : @nytimes_events
-
+  
+  
   @weather_current = @weather_rpt['current_observation']["temperature_string"]
+  if @weather_current.empty
+    @weather_current = "No weather forecast information at this time"
+    @weather_wind, @weather_humidity, @weather_feels, @weather_ftext, @weather_day = "No information at this time"
+  else
   @weather_wind = @weather_rpt['current_observation']["wind_string"]
   @weather_humidity = @weather_rpt['current_observation']["relative_humidity"]
   @weather_feels = @weather_rpt['current_observation']["feelslike_string"]
@@ -38,27 +37,48 @@ class HomeController < ApplicationController
   @weather_ftext = @weather_forecast["forecast"]["txt_forecast"]["forecastday"]["fcttext"]
   @weather_day = @weather_forecast["forecast"]["txt_forecast"]["forecastday"]["title"]
   # @weather_fnextdaytext = []
+end
 
+  top_stories
+  articles
+  networking
+  events
+
+
+end
 
   # assign json array info to variables
   
   
   def top_stories   # Top stories
     @top_title = @nytimes_top["results"]["title"] # with title being the link_to to the 'url'; 
+    if @top_title.empty
+      @top_title = "Unable to retrieve top stories at this time" 
+      @top_url, @top_date = "No information at this time"
+    else
     @top_url = @nytimes_top["results"]["url"]
     @top_date = @nytimes_top["results"]["last_updated"]
   end
+end
 
 
   def articles    # Article search
     @headline = @vnytimes_data["response"]["docs"]["headline"]["main"]
+    if @headline.empty 
+     @headline = "No news on your interests at this time" # test if there is data
+     @art_date, @art_url = "No information at this time"
+  else
     @art_date = @nytimes_data["response"]["docs"]["pub_date"]
     @art_url = @nytimes_data["response"]["docs"]["web_url"]
   end
-
+end
 
   def networking
     @meetup_grpname = @meetup_data["results"]["group"]["name"]
+    if @meetup_grpname.empty
+      @meetup_grpname = "No information on meetup groups" 
+      @meetup_locname, @meetup_address, @meetup_city, @meetup_desc, @meetup_url, @meetup_status = "No information at this time"
+    else
     @meetup_locname = @meetup_data["results"]["venue"]["name"]
     @meetup_address = @meetup_data["results"]["venue"]["address1"]
     @meetup_city = @meetup_data["results"]["venue"]["city"]
@@ -67,32 +87,20 @@ class HomeController < ApplicationController
     @meetup_status = @meetup_data["results"]["status"]
 
   end
-
+end
 
   def events   # Events
     @events_desc = @nytimes_events["results"]["web_description"]  # description of event
+    if @events_desc.empty
+      @events_desc = "No information on local events meeting your free time interest"
+      @events_name, @events_url, @events_free = "No information at this time"
+    else
     @events_name = @nytimes_events["results"]["event_name"]
     # @events_date = @nytimes_events["results"][""]
     @events_url = @nytimes_events["results"]["event_detail_url"]
     @events_free = @nytimes_events["results"]["free"]
   end
-
-
-  # Meetup search
-  
-
-
-  # Weather report
-  
-
-  # @weather_final = weather_rpt
-  # @nytimes_final = nytimes
-  # @meetup_final = meetup
- 
-# view displays the api results
-
-   end
-
+end
 
   def data_retrieve(url_string)
     url = url_string
@@ -111,8 +119,7 @@ class HomeController < ApplicationController
     # nyt_data = open(url).read
     # now parse and put into an array (shown below)
     # nyt_result = JSON.parse(nyt_data)
-
-  
+ 
   end
 
 
