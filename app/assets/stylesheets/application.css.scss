@@ -16,3 +16,54 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.top_space
+{
+  height: 150px;
+}
+
+.main_space
+{
+  
+}
+
+.bottom_space
+{
+  
+}
+body {
+  background-color: #889DB2;
+  }
+  .jumbotron
+  {text-align:center;}
+  .right {
+  text-align:right;
+  }
+  .left
+  {text-align:left;
+  }
+  .container {
+  margin-left: 135px
+}
+
+.navbar .nav > li > a.brand {
+  padding-left: 0px;
+}
+
+.quiet {
+  color: #ababab;
+}
+
+div.nav_item {
+  margin-left: 25px;
+  float: left;
+}
+
+.label  {
+  a, a:hover, a:focus {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+.intro_text
+{text-align:center;}

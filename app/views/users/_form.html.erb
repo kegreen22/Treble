@@ -1,52 +1,53 @@
-<div class="container">
-  <div class ="row">
-  <div class="nav-bar"></div>
-  </div>
 
-<div class="row">
+  <div class="nav-bar"></div>
+  
+
 <div class="well">
 <%= form_for @user do |f| %>
 <%= render 'layouts/errors', obj: @user %>
- </div>
 </div>
 
- <div class="row">
+
 <div class="control-group">
 <%= f.label :username %>
 <%= f.text_field :username%>
 </div>
- <div>
 
-<div class="row">
+
 <div class="control-group">
 <%= f.label :password %>
 <%= f.password_field :password %>
 </div>
-</div>
 
-<div class="row">
+<p> </p>
+
 <div class="control-group">
 <%= label_tag :city %>
-<%= text_field_tag :city, params[:city] || '' %>
+<%= text_field_tag :city, params[:city] %>
+</div>
 
+<div class="control-group">
 <%= label_tag :state %>
-<%= text_field_tag :state, params[:state] || '' %>
+<%= text_field_tag :state, params[:state] %>
+</div>
 
+<div class="control-group">
 <%= label_tag :zipcode %>
-<%= text_field_tag :zipcode, params[:zipcode] || '' %>
-</div>
+<%= text_field_tag :zipcode, params[:zipcode] %>
 </div>
 
-<div class="row"> 
+
 <div class="control-group">
 <%= label_tag :first_interest %>
-<%= text_field_tag :first_interest, params[:first_interest] || '' %>
-<%= label_tag :free_time %>
-<%= text_field_tag :free_time, params[:free_time] || '' %>
-</dvi>
+<%= text_field_tag :first_interest, params[:first_interest] %>
 </div>
+
+<div class="control-group">
+<%= label_tag :free_time %>
+<%= text_field_tag :free_time, params[:free_time] %>
+</dvi>
+
 <%= f.submit (@user.new_record? ? "Register" : "Update Profile"), class: "btn btn-success"  %>
  
 <% end %>
-</div>
 </div>
