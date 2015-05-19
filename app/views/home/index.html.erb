@@ -8,13 +8,13 @@
 <div class='jumbotron'>
   <h1>Welcome to Treble!</h1>
  </div>
- <p class="intro_text">Treble is a way to quickly view top stories, news on your interests and see relevant local events.</p>
- <p class="intro_text">Give us a try!</p>
+ <h3 class="intro_text">Treble is a way to quickly view top stories, news on your interests and see relevant local events.</h3>
+ <h4 class="intro_text">Give us a try!</h4>
 
 <br>
 <div class="row">
   <div class="col-xs-6" class="right">
-<%= link_to "Sign up if you're new", register_path %>
+<%= button_to "Sign up if you're new", method: :get, :sessions, action: register_path %>
 </div>
 
 <div class="col-xs-6" class="left">
@@ -26,13 +26,6 @@
 
     <% else %>
 
-    <ul class='dropdown-menu'>
-    <li>
-    <%= link_to edit_user_path(current_user) do %> <i class="icon-pencil"></i>Edit Profile<% end %>
-    <%= link_to user_path(current_user) do %> <i class="icon icon-home"></i>View Profile<% end %>
-    <%= link_to logout_path do %> <i class="icon icon-user"> </i>Logout<% end %>
-    </li>
-</ul> 
 <span>
 
   <div class="row">

@@ -23,17 +23,5 @@
     </li>
 </ul> 
 </div>          
-<% else %>
-<span>
-<div class='nav_item'>
-  <%= link_to "Sign in", login_path %>
-</div>
-</span>
-<% end %>
-<span>
-<div class='nav_item'>
-  <% if !logged_in? %>
-<%= link_to "Sign up if you're new", register_path %>
-  </div>
-</span>
+
    <% end %>            
