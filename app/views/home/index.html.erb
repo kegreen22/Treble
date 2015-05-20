@@ -12,15 +12,12 @@
  <h4 class="intro_text">Give us a try!</h4>
 
 <br>
-<div class="row">
-  <div class="col-xs-6" class="right">
-   <%= button_to "Sign up if you're new", register_path, :method => "get", class: "button_link" %>
+<div class="row" id="center">
+  <%= button_to "Sign up if you're new", register_path, :method => "get", class: "button_link1" %>
+
+  <%= button_to "Registered? Sign in", login_path, :method => "get", class: "button_link2" %>
 </div>
 
-<div class="col-xs-6" class="left">
-<%= button_to "Sign in", login_path, :method => "get" %>
-</div>
-</div>
 
   <div class='bottom_space'></div>
 
