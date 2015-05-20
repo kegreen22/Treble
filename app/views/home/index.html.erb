@@ -14,11 +14,11 @@
 <br>
 <div class="row">
   <div class="col-xs-6" class="right">
-<%= button_to "Sign up if you're new", method: :get, :sessions, action: register_path %>
+   <%= button_to "Sign up if you're new", register_path, :method => "get", class: "button_link" %>
 </div>
 
 <div class="col-xs-6" class="left">
-<%= link_to "Sign in", login_path %>
+<%= button_to "Sign in", login_path, :method => "get" %>
 </div>
 </div>
 
