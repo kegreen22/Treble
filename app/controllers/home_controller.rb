@@ -3,22 +3,26 @@ class HomeController < ApplicationController
   require 'open-uri'
   require 'json'
 
-  def home
+  def index
 
+    if logged_in?
   # get user interest from the database
-  interest_pre = User.interest1
-  @interest1 = interest_pre.gsub(' ','+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the article searches
-  @zipcode = User.zipcode
+  @user = current_user
+  @interest_pre = @user.interest1
+  puts @user.to_s
+  puts @user.interest1
+  @interest = @interest_pre.gsub(' ','+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the article searches
+  @zipcode = @user.zipcode
 
-  free_pre = User.free_time  
+  free_pre = @user.free_time  
   @free_time = free_pre.gsub(' ', '+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the event searches
   
   # call api methods and insert interest into api call
 
-  @nytimes_data = data_retrieve("http://api.nytimes.com/svc/search/v2/articlesearch.json?&q=" + @interest1 + "&sort=newest&api-key=bd2d3da37f58e2247ab30155400fc222:3:67128716")
-  @weather_rpt = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/conditions/q/" + User.state + "/" + User.city + ".json")
-  @weather_forecast = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/forecast/q/" + User.state + "/" + User.city + ".json")
-  @meetup_data = data_retrieve("https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=" + User.zipcode + "&text=" + @interest1 + "&page=20&key=6874237675483c4f5e12f416939655a")
+  @nytimes_data = data_retrieve("http://api.nytimes.com/svc/search/v2/articlesearch.json?&q=" + current_user.interest1 + "&sort=newest&api-key=bd2d3da37f58e2247ab30155400fc222:3:67128716")
+  @weather_rpt = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/conditions/q/" + current_user.state + "/" + current_user.city + ".json")
+  @weather_forecast = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/forecast/q/" + current_user.state + "/" + current_user.city + ".json")
+  @meetup_data = data_retrieve("https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=" + current_user.zipcode + "&text=" + @interest + "&page=20&key=6874237675483c4f5e12f416939655a")
   @nytimes_top = data_retrieve("http://api.nytimes.com/svc/topstories/v1/home.json?api-key=799bb4a946ced430d7d8611ca957387b:8:67128716")
   @nytimes_events = data_retrieve("http://api.nytimes.com/svc/events/v2/listings.json?&query=" + @free_time + "&api-key=3484b827fcc7f7a5962abbf4b36fdfc4:19:67128716")
 
@@ -43,6 +47,12 @@ end
   articles
   networking
   events
+
+else
+  render 'index'
+
+end
+
 
 
 end
