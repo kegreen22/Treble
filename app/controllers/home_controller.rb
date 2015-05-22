@@ -11,25 +11,50 @@ class HomeController < ApplicationController
   @interest_pre = @user.interest1
   puts @user.to_s
   puts @user.interest1
-  @interest = @interest_pre.gsub(' ','+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the article searches
+  @interest_pre = @interest_pre.gsub(/\s+/,'+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the article searches
+  puts @interest_pre
   @zipcode = @user.zipcode
+  puts current_user.zipcode
 
-  free_pre = @user.free_time  
-  @free_time = free_pre.gsub(' ', '+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the event searches
-  
+  @free_pre = @user.free_time  
+  @free_pre = @free_pre.gsub(/\s+/,'+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the event searches
+  puts @free_time
+
+  @state_pre = "NY" 
+  @city_pre = @user.city.gsub(/\s+/,'_')
+  puts @city_pre
   # call api methods and insert interest into api call
 
-  @nytimes_data = data_retrieve("http://api.nytimes.com/svc/search/v2/articlesearch.json?&q=" + current_user.interest1 + "&sort=newest&api-key=bd2d3da37f58e2247ab30155400fc222:3:67128716")
-  @weather_rpt = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/conditions/q/" + current_user.state + "/" + current_user.city + ".json")
-  @weather_forecast = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/forecast/q/" + current_user.state + "/" + current_user.city + ".json")
-  @meetup_data = data_retrieve("https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=" + current_user.zipcode + "&text=" + @interest + "&page=20&key=6874237675483c4f5e12f416939655a")
+  @nytimes_data = data_retrieve("http://api.nytimes.com/svc/search/v2/articlesearch.json?&q=" + @interest_pre + "&sort=newest&api-key=bd2d3da37f58e2247ab30155400fc222:3:67128716")
+  @weather_rpt = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/conditions/q/" + @state_pre + "/" + @city_pre + ".json")
+  @weather_forecast = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/forecast/q/" + @state_pre + "/" + @city_pre + ".json")
+  @meetup_data = data_retrieve("https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=" + current_user.zipcode + "&text=" + @interest_pre + "&page=20&key=6874237675483c4f5e12f416939655a")
   @nytimes_top = data_retrieve("http://api.nytimes.com/svc/topstories/v1/home.json?api-key=799bb4a946ced430d7d8611ca957387b:8:67128716")
-  @nytimes_events = data_retrieve("http://api.nytimes.com/svc/events/v2/listings.json?&query=" + @free_time + "&api-key=3484b827fcc7f7a5962abbf4b36fdfc4:19:67128716")
+  @nytimes_events = data_retrieve("http://api.nytimes.com/svc/events/v2/listings.json?&query=" + @free_pre + "&api-key=3484b827fcc7f7a5962abbf4b36fdfc4:19:67128716")
 
+  if @nytimes_data.blank?
+   puts "art search bad" 
+ end
+  if @weather_rpt.blank? 
+    puts "wthr rpt bad" 
+  end
+  if @weather_forecast.blank? 
+    puts "forecast bad" 
+  end
+  if @meetup_data.blank? 
+    puts "meetup bad" 
+  end
+  if @nytimes_top.blank? 
+    puts "top bad" 
+  end
+  if @nytimes_events.blank? 
+    puts "events bad" 
+  end
+ 
   # check if any results are empty or nil and if so assign a default string
   
   
-  @weather_current = @weather_rpt['current_observation']["temperature_string"]
+  @weather_current = @weather_rpt['current_observation']['temp_f']
   if @weather_current.empty
     @weather_current = "No weather forecast information at this time"
     @weather_wind, @weather_humidity, @weather_feels, @weather_ftext, @weather_day = "No information at this time"
@@ -115,7 +140,7 @@ end
   def data_retrieve(url_string)
     url = url_string
     data_read =open(url).read
-    data_result = JSON.parse(data_read)
+    @data_result = JSON.parse(data_read)
     return
   end
 
