@@ -25,12 +25,18 @@ class HomeController < ApplicationController
   puts @city_pre
   # call api methods and insert interest into api call
 
-  @nytimes_data = data_retrieve("http://api.nytimes.com/svc/search/v2/articlesearch.json?&q=" + @interest_pre + "&sort=newest&api-key=bd2d3da37f58e2247ab30155400fc222:3:67128716")
+  @testing = Date.today
+  @limit = @testing.days_ago(14)
+  @begin_time = @limit.to_s
+  @begin_time = @begin_time.gsub('-','')
+  puts @begin_time
+
+  @nytimes_data = data_retrieve("http://api.nytimes.com/svc/search/v2/articlesearch.json?&q=" + @interest_pre + "&begin_date=" + @begin_time + "&sort=newest&api-key=bd2d3da37f58e2247ab30155400fc222:3:67128716")
   @weather_rpt = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/conditions/q/" + @state_pre + "/" + @city_pre + ".json")
   @weather_forecast = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/forecast/q/" + @state_pre + "/" + @city_pre + ".json")
   @meetup_data = data_retrieve("https://api.meetup.com/2/open_events?&sign=true&photo-host=public&zip=" + current_user.zipcode + "&text=" + @interest_pre + "&page=20&key=6874237675483c4f5e12f416939655a")
   @nytimes_top = data_retrieve("http://api.nytimes.com/svc/topstories/v1/home.json?api-key=799bb4a946ced430d7d8611ca957387b:8:67128716")
-  @nytimes_events = data_retrieve("http://api.nytimes.com/svc/events/v2/listings.json?&query=" + @free_pre + "&api-key=3484b827fcc7f7a5962abbf4b36fdfc4:19:67128716")
+  @nytimes_events = data_retrieve("http://api.nytimes.com/svc/events/v2/listings.json?&query=" + @free_pre + "&limit=20&api-key=3484b827fcc7f7a5962abbf4b36fdfc4:19:67128716")
 
   if @nytimes_data.blank?
    puts "art search bad" 
@@ -51,11 +57,16 @@ class HomeController < ApplicationController
     puts "events bad" 
   end
  
+  @hits = (@nytimes_data["response"]["meta"]["hits"]).to_i
+  puts @hits
+  
+  @event_amt = (@nytimes_events["num_results"]).to_i
+  puts @event_amt
   # check if any results are empty or nil and if so assign a default string
   
   
   @weather_current = @weather_rpt['current_observation']['temp_f']
-  if @weather_current.empty
+  if @weather_current.blank?
     @weather_current = "No weather forecast information at this time"
     @weather_wind, @weather_humidity, @weather_feels, @weather_ftext, @weather_day = "No information at this time"
   else
@@ -63,8 +74,8 @@ class HomeController < ApplicationController
   @weather_humidity = @weather_rpt['current_observation']["relative_humidity"]
   @weather_feels = @weather_rpt['current_observation']["feelslike_string"]
 
-  @weather_ftext = @weather_forecast["forecast"]["txt_forecast"]["forecastday"]["fcttext"]
-  @weather_day = @weather_forecast["forecast"]["txt_forecast"]["forecastday"]["title"]
+  @weather_ftext = @weather_forecast["forecast"]["txt_forecast"]["forecastday"]  #["fcttext"]
+  @weather_day = @weather_forecast["forecast"]["txt_forecast"]["forecastday"] #["title"]
   # @weather_fnextdaytext = []
 end
 
@@ -86,8 +97,10 @@ end
   
   
   def top_stories   # Top stories
+   
     @top_title = @nytimes_top["results"]["title"] # with title being the link_to to the 'url'; 
-    if @top_title.empty
+    
+    if @top_title.blank?
       @top_title = "Unable to retrieve top stories at this time" 
       @top_url, @top_date = "No information at this time"
     else
@@ -98,8 +111,8 @@ end
 
 
   def articles    # Article search
-    @headline = @vnytimes_data["response"]["docs"]["headline"]["main"]
-    if @headline.empty 
+    @headline = @nytimes_data["response"]["docs"]["headline"]["main"]
+    if @headline.blank? 
      @headline = "No news on your interests at this time" # test if there is data
      @art_date, @art_url = "No information at this time"
   else
@@ -110,7 +123,7 @@ end
 
   def networking
     @meetup_grpname = @meetup_data["results"]["group"]["name"]
-    if @meetup_grpname.empty
+    if @meetup_grpname.blank?
       @meetup_grpname = "No information on meetup groups" 
       @meetup_locname, @meetup_address, @meetup_city, @meetup_desc, @meetup_url, @meetup_status = "No information at this time"
     else
@@ -126,7 +139,7 @@ end
 
   def events   # Events
     @events_desc = @nytimes_events["results"]["web_description"]  # description of event
-    if @events_desc.empty
+    if @events_desc.blank?
       @events_desc = "No information on local events meeting your free time interest"
       @events_name, @events_url, @events_free = "No information at this time"
     else
@@ -141,7 +154,11 @@ end
     url = url_string
     data_read =open(url).read
     @data_result = JSON.parse(data_read)
-    return
+
+    unless @data_result.blank?
+   puts "search good" 
+    end
+  return @data_result
   end
 
 
