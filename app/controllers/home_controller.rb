@@ -104,20 +104,21 @@ end
   @top_flag == 0
   else
   @top_flag = 1
-    @top_title = @nytimes_top["results"]["title"] # with title being the link_to to the 'url'; 
+    @top_stories = @nytimes_top["results"] # with title being the link_to to the 'url'; 
     
-    @top_url = @nytimes_top["results"]["url"]
-    @top_date = @nytimes_top["results"]["last_updated"]
+   # @top_url = @nytimes_top["results"]["url"]
+   # @top_date = @nytimes_top["results"]["last_updated"]
   end
 end
 
 
   def articles    # Article search
    # check for useful results 
-  if ((@nytimes_data["status"] != "OK"]) || (@nytimes_data["response"]["meta"]["hits"]).to_i == 0)) 
+  if ((@nytimes_data["status"] != "OK") || (@nytimes_data["response"]["meta"]["hits"].to_i == 0)) 
   @article_flag = 0
   else
   @article_flag = 1
+end
 
 
     #@headline = @nytimes_data["response"]["docs"] #["headline"]["main"]

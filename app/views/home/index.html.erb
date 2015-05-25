@@ -29,29 +29,9 @@
   <div class='well'>
   <h3>Welcome <%= current_user %> </h3>
   <br>
-<h4>The weather at <%= current_user.city %><%= ", " %><%= current_user.state %> is currently <%= @weather_current %>.</h4>
+<h4>The weather at <%= current_user.city %><%= ", " %><%= current_user.state %> is currently <%= @weather_current %> degrees F.</h4>
 <br>
-<h4>The weather forecast is: </h4>
 
-<table id="locations" class ="table1" cellspacing="0" width="100%">
-  <thead>
-  <tr>
-    <th>Date</th>
-    <th>Forecast</th>
-  </tr>
-  </thead>
-
-
-  <tr>
-    <% @weather_day.each do |date| %>
-      <td><%= date %></td>
-      <% @weather_ftext.each do |weather_cast| %>
-      <td> <%= weather_cast %>
-  </tr>
-    <% end %>
-    <% end %>
-  </body>
-</table>
 </div>
 </div>
 <br>
@@ -59,7 +39,7 @@
 <div class="row">
  <div role='tabpanel'>
   <ul class='nav nav tabs' role='tablist'>
-    <li class= "active"><%= link_to "Top Stories", controller: "home", action: "top_stories" %><span class="glyphicon glyphicon-globe"></span></li>
+    <li class= "active"><%= link_to "Top Stories", action: "top_stories" %><span class="glyphicon glyphicon-globe"></span></li>
     <li role='news'> <%= link_to "News on your interests", controller: "home", action: "articles" %><span class="glyphicon glyphicon-briefcase"></span></li>
     
     <% if @test == 1 %>

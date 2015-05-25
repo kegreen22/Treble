@@ -13,13 +13,15 @@
 <body>
   <tr>
      <% @nytimes_data["response"]["docs"].each do |article| %>
-    <% article["pub_date"].each do |art_date| %>
-    <td><%= art_date %></td>
-    <% article["web_url"].each do |art_url| %> 
+    <td><%= article["pub_date"] %></td>
+    
+    <% article["web_url"] %>
     <% article["headline"].each do |head| %>
     <% head["main"].each do |maintitle| %>
     <td><%= link_to art_url, maintitle, target: "_blank" %> </td>
       </tr>
+    <% end %>
+    <% end %>
     <% end %>
     <% end %>
     <% end %>

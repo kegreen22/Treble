@@ -9,7 +9,10 @@ get 'register', to: 'users#new'
 get '/login', to: 'sessions#new'
 post '/login', to: 'sessions#create'
 get '/logout', to: 'sessions#destroy'
-
+get 'top_stories', to: 'home#top_stories' 
+get 'articles', to: 'home#articles'
+get 'networking', to: 'home#networking'
+get 'events', to: 'home#events'
 
 
 
