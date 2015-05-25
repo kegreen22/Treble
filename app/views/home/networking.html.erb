@@ -1,5 +1,8 @@
 <table id="locations" class ="table1" cellspacing="0" width="100%">
   <thead>
+    <% if @meetup_flag == 0 %>
+    <p>No meetups meet your criteria<p>
+      <% else %>
   <tr>
     <th><%= "Meetup events based on your interest -" + User.interest1 %></th>
     <th>Meetup Group Name</th>
@@ -24,5 +27,5 @@
     <% end %>
   </body>
 </table>
-
+<% end %>
 

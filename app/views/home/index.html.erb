@@ -28,6 +28,7 @@
   <div class="row">
   <div class='well'>
   <h3>Welcome <%= current_user %> </h3>
+  <br>
 <h4>The weather at <%= current_user.city %><%= ", " %><%= current_user.state %> is currently <%= @weather_current %>.</h4>
 <br>
 <h4>The weather forecast is: </h4>
@@ -60,8 +61,11 @@
   <ul class='nav nav tabs' role='tablist'>
     <li class= "active"><%= link_to "Top Stories", controller: "home", action: "top_stories" %><span class="glyphicon glyphicon-globe"></span></li>
     <li role='news'> <%= link_to "News on your interests", controller: "home", action: "articles" %><span class="glyphicon glyphicon-briefcase"></span></li>
+    
+    <% if @test == 1 %>
     <li role='networking'><%= link_to "Meetup Networking Opportunities", controller: "home", action: "networking" %><span class="glyphicon glyphicon-thumbs-up"></span></li>
     <li role='events'><%= link_to "Events for your free time", controller: "home", action: "events" %><span class="glyphicon glyphicon-heart"> </span></li>
+    <% end %>
   </ul>
 
 </div>
