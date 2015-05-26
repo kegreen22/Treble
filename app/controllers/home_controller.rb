@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   # get user interest from the database
   @user = current_user
   @interest_pre = @user.interest1
-  puts @user.to_s
+  puts @user.slug
   puts @user.interest1
   @interest_pre = @interest_pre.gsub(/\s+/,'+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the article searches
   puts @interest_pre
@@ -18,7 +18,7 @@ class HomeController < ApplicationController
 
   @free_pre = @user.free_time  
   @free_pre = @free_pre.gsub(/\s+/,'+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the event searches
-  puts @free_time
+  puts @free_pre 
 
   @state_pre = "NY" 
   @city_pre = @user.city.gsub(/\s+/,'_')
@@ -64,10 +64,10 @@ class HomeController < ApplicationController
   @event_amt = (@nytimes_events["num_results"]).to_i
   puts @event_amt
 
-  @meetup_amt = 0
+  @meetup_amt = @meetup_data["results"].length
   puts @meetup_amt
 
-  
+
 
   # check if any results are empty or nil and if so assign a default string
   
@@ -88,10 +88,10 @@ end
 
   @test = 0 # use this to show other tabs; if it is = 1 then other tabs will be shown
 
-  top_stories
-  articles
-  networking
-  events
+  # top_stories
+  # articles
+  # networking
+  # events
 
 else
   render 'index'
