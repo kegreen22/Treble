@@ -57,11 +57,18 @@ class HomeController < ApplicationController
     puts "events bad" 
   end
  
+  # determine how many results were returned
   @hits = (@nytimes_data["response"]["meta"]["hits"]).to_i
   puts @hits
   
   @event_amt = (@nytimes_events["num_results"]).to_i
   puts @event_amt
+
+  @meetup_amt = 0
+  puts @meetup_amt
+
+  
+
   # check if any results are empty or nil and if so assign a default string
   
   
