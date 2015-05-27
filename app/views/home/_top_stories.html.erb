@@ -10,26 +10,26 @@
 <table id="locations" class ="table1" cellspacing="0" width="100%">
   <thead>
   <tr>
-    <th>Date</th>
+    
     <th>Top Stories</th>
   </tr>
   </thead>
 
 <body>
   <tr>
-    <% stories.each do |story| %>
-      <%= story["published_date"].each do |date| %>
-        <td><%= date %></td>
-      <% story["url"].each do |url| %>
-      <% story["title"].each do |title| %>
-      <td><%= link_to url, title, target: "_blank" %></td>
+    <% stories["results"].each do |result| %>
+              
+     
+      <td><%= link_to result["title"], result["url"], target: "_blank" %></td>
       </tr>
+   
     <% end %>
-    <% end %>
-    <% end %>
+    
+    
   </body>
 </table>
 <% end %>
+
 
 </div>
 </div>

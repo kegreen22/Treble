@@ -58,16 +58,17 @@ class HomeController < ApplicationController
   end
  
   # determine how many results were returned
-  @hits = (@nytimes_data["response"]["meta"]["hits"]).to_i
+  @hits = (@nytimes_data["response"]["meta"]["hits"]).to_i # article search hits
   puts @hits
   
-  @event_amt = (@nytimes_events["num_results"]).to_i
+  @event_amt = (@nytimes_events["num_results"]).to_i # events hits
   puts @event_amt
 
-  @meetup_amt = @meetup_data["results"].length
+  @meetup_amt = @meetup_data["results"].length # meetup hits
   puts @meetup_amt
 
-
+  @top_stories1 = (@nytimes_top["num_results"]).to_i # top stories hits
+  puts @top_stories1
 
   # check if any results are empty or nil and if so assign a default string
   
@@ -107,24 +108,18 @@ end
   
   def top_stories   # Top stories
    # check for useful results 
-  if ((@nytimes_top["status"] != "OK") || (@nytimes_top["num_results"].to_i == 0))
-  @top_flag == 0
-  else
-  @top_flag = 1
+ 
     @top_stories = @nytimes_top["results"] # with title being the link_to to the 'url'; 
     
    # @top_url = @nytimes_top["results"]["url"]
    # @top_date = @nytimes_top["results"]["last_updated"]
-  end
+
 end
 
 
   def articles    # Article search
    # check for useful results 
-  if ((@nytimes_data["status"] != "OK") || (@nytimes_data["response"]["meta"]["hits"].to_i == 0)) 
-  @article_flag = 0
-  else
-  @article_flag = 1
+ 
 end
 
 
@@ -136,7 +131,7 @@ end
    # @art_date = @nytimes_data["response"]["docs"] #["pub_date"]
    # @art_url = @nytimes_data["response"]["docs"] #["web_url"]
   #end
-end
+
 
   def networking
 #    @meetup_grpname = @meetup_data["results"]["group"]["name"]
@@ -168,11 +163,11 @@ end
 end
 
   def data_retrieve(url_string)
-    url = url_string
-    data_read =open(url).read
-    @data_result = JSON.parse(data_read)
+    url = url_string  # open url 
+    data_read =open(url).read   # read the url
+    @data_result = JSON.parse(data_read)  # parse JSON received from the api
 
-    return @data_result
+    return @data_result #return parsed JSON data to an instance variable
   end
 
 

@@ -27,7 +27,7 @@
 
   <div class="row">
   <div class='well'>
-  <h3>Welcome <%= current_user %> </h3>
+  <h3>Welcome! </h3>
   <br>
 <h4>The weather at <%= current_user.city %><%= ", " %><%= current_user.state %> is currently <%= @weather_current %> degrees F.</h4>
 <br>
@@ -40,10 +40,10 @@
  <div role='tabpanel'>
   <ul class='nav nav-tabs'>
     <li class='<%= 'active' if params[:tab].nil? %>'>
-   <%= link_to "Top Stories", action: "top_stories" %><span > </span></li>
+   <%= link_to "Top Stories", action: "top_stories" %><span class="badge"><%= @top_stories1 %> </span></li>
 
     <li class='<%= 'active' if params[:tab] == 'Interests' %>'>
-    <%= link_to "News on your interests", controller: "home", action: "articles", tab: 'Interests' %><span class="badge"><%= @hits %></span></li>
+    <%= link_to "News on your interests", controller: "home", action: "articles", tab: 'interests' %><span class="badge"><%= @hits %></span></li>
     
     <% if @test == 1 %>
     <li role='networking'><%= link_to "Meetup Networking Opportunities", controller: "home", action: "networking" %><span class="glyphicon glyphicon-thumbs-up"></span></li>
@@ -54,8 +54,8 @@
   <% if params[:tab].nil? %>
   <%= render 'top_stories', stories: @nytimes_top %>
   
-  <% elsif params[:tab] == 'Interests' %>
-  <%= render 'articles', interests: @nytimes_data  %>
+  <% elsif params[:tab] == 'interests' %>
+  <%= render 'articles', interest: @nytimes_data  %>
   <% end %>
 
 </div>

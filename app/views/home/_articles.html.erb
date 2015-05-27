@@ -3,7 +3,7 @@
 
   <div class='span0 well text-center'>
 
- <% if interests.blank? %>
+ <% if interest.blank? %>
     <p>No articles meet your criteria<p>
       <% else %>
 
@@ -11,7 +11,7 @@
   <thead>
     <tr>
     <th>Date</th>
-    <th><%= "Articles based on your interest -" + User.interest %></th>
+    <th><%= "Articles based on your interest -" + User.interest1 %></th>
   </tr>
   </thead>
 
@@ -20,14 +20,10 @@
      <% interest["response"]["docs"].each do |article| %>
     <td><%= article["pub_date"] %></td>
     
-    <% article["web_url"] %>
-    <% article["headline"].each do |head| %>
-    <% head["main"].each do |maintitle| %>
-    <td><%= link_to art_url, maintitle, target: "_blank" %> </td>
+    <td><%= link_to article["headline"]["main"], article["web_url"], target: "_blank" %> </td>
       </tr>
     <% end %>
-    <% end %>
-    <% end %>
+    
     
   </body>
 </table>
