@@ -42,8 +42,8 @@
     <li class='<%= 'active' if params[:tab].nil? %>'>
    <%= link_to "Top Stories", action: "top_stories" %><span class="badge"><%= @top_stories1 %> </span></li>
 
-    <li class='<%= 'active' if params[:tab] == 'Interests' %>'>
-    <%= link_to "News on your interests", controller: "home", action: "articles", tab: 'interests' %><span class="badge"><%= @hits %></span></li>
+    <li class='<%= 'active' if params[:tab] == 'interests' %>'>
+    <%= link_to "News on your interests", action: "articles", tab: 'interests' %><span class="badge"><%= @hits %></span></li>
     
     <% if @test == 1 %>
     <li role='networking'><%= link_to "Meetup Networking Opportunities", controller: "home", action: "networking" %><span class="glyphicon glyphicon-thumbs-up"></span></li>
@@ -55,7 +55,7 @@
   <%= render 'top_stories', stories: @nytimes_top %>
   
   <% elsif params[:tab] == 'interests' %>
-  <%= render 'articles', interest: @nytimes_data  %>
+  <%= render 'home/articles', interest: @nytimes_data  %>
   <% end %>
 
 </div>
