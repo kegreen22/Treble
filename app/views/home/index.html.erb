@@ -52,10 +52,10 @@
   </ul>
 
   <% if params[:tab].nil? %>
-  <%= render 'top_stories' %>
-  <% end %>
+  <%= render 'top_stories', stories: @nytimes_top %>
+  
   <% elsif params[:tab] == 'Interests' %>
-  <%= render 'articles' %>
+  <%= render 'articles', interests: @nytimes_data  %>
   <% end %>
 
 </div>

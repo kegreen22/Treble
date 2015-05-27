@@ -1,7 +1,11 @@
-<% if @top_flag == 0 %>
-    <p>No articles meet your criteria<p>
-      <% else %>
 
+<div class='row'>
+
+  <div class='span0 well text-center'>
+
+    <% if stories.blank? %>
+    <p>There are no top stories at this time.<p>
+      <% else %>
 
 <table id="locations" class ="table1" cellspacing="0" width="100%">
   <thead>
@@ -13,11 +17,11 @@
 
 <body>
   <tr>
-    <% @top_stories.each do |stories| %>
-      <%= stories["published_date"].each do |date| %>
+    <% stories.each do |story| %>
+      <%= story["published_date"].each do |date| %>
         <td><%= date %></td>
-      <% stories["url"].each do |url| %>
-      <% stories["title"].each do |title| %>
+      <% story["url"].each do |url| %>
+      <% story["title"].each do |title| %>
       <td><%= link_to url, title, target: "_blank" %></td>
       </tr>
     <% end %>
@@ -27,3 +31,5 @@
 </table>
 <% end %>
 
+</div>
+</div>
