@@ -40,15 +40,17 @@
  <div role='tabpanel'>
   <ul class='nav nav-tabs'>
     <li class='<%= 'active' if params[:tab].nil? %>'>
-   <%= link_to "Top Stories", action: "top_stories" %><span class="badge"><%= @top_stories1 %> </span></li>
+   <%= link_to "Top Stories", tab: nil %><span class="badge"><%= @top_stories1 %> </span></li>
 
     <li class='<%= 'active' if params[:tab] == 'interests' %>'>
-    <%= link_to "News on your interests", action: "articles", tab: 'interests' %><span class="badge"><%= @hits %></span></li>
+    <%= link_to "News on your interests", tab: 'interests' %><span class="badge"><%= @hits %></span></li>
     
-    <% if @test == 1 %>
-    <li role='networking'><%= link_to "Meetup Networking Opportunities", controller: "home", action: "networking" %><span class="glyphicon glyphicon-thumbs-up"></span></li>
-    <li role='events'><%= link_to "Events for your free time", controller: "home", action: "events" %><span class="badge"><%= @event_amt %> </span></li>
-    <% end %>
+    <li class='<%= 'active' if params[:tab] == 'meetup' %>'>
+    <%= link_to "Meetup Networking Opportunities", tab: 'meetup' %><span class="badge"><%= @meetup_amt %></span></li>
+  
+    <li class='<%= 'active' if params[:tab] == 'freetime' %>'>
+    <%= link_to "Events for your free time", tab: 'freetime' %><span class="badge"><%= @event_amt %> </span></li>
+    
   </ul>
 
   <% if params[:tab].nil? %>
@@ -56,6 +58,13 @@
   
   <% elsif params[:tab] == 'interests' %>
   <%= render 'home/articles', interest: @nytimes_data  %>
+
+  <% elsif params[:tab] == 'meetup' %>
+  <%= render 'networking', meetups: @meetup_data %> 
+
+  <% elsif params[:tab] == 'freetime' %>
+  <%= render 'events', freetime: @nytimes_events %>  
+
   <% end %>
 
 </div>

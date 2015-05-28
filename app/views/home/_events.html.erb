@@ -1,27 +1,33 @@
+<div class='row'>
+
+  <div class='span0 well text-center'>
+
+ <% if freetime.blank? %>
+    <p>No events meet your criteria<p>
+      <% else %>
+
+
 <table id="locations" class ="table1" cellspacing="0" width="100%">
   <thead>
   <tr>
-    <th><%= "Events based on your interest - " + User.free_time %></th>
+    <th>"Event" </th>
     <th>Description</th>
-    <th>Free?</th>
+    
   </tr>
   </thead>
 
 <body>
   <tr>
-      <% @events_url.each do |url| %>
-        <% @events_name.each do |name| %>
-           <td><%= link_to url, name, target: "_blank" %></td>
-            <% @events_desc.each do |description| %>
-            <td><%= description %></td>
-            <% @events_free.each do |free| %>
-            <td><%= free %></td>
-      </tr>
-      <% end %>
-    <% end %>
-    <% end %>
+      <% freetime["results"].each do |event| %>
+        
+           <td><%= link_to event["event_name"], event["event_detail_url"], target: "_blank" %></td>
+            
+            <td><%= event["web_description"] %></td>
+     </tr>
+     
+    
     <% end %>
   </body>
 </table>
-
+<% end %>
 

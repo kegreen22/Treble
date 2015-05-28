@@ -1,30 +1,36 @@
-<table id="locations" class ="table1" cellspacing="0" width="100%">
-  <thead>
-    <% if @meetup_flag == 0 %>
+
+ <div class='row'>
+
+  <div class='span0 well text-center'>
+
+ <% if meetups.blank? %>
     <p>No meetups meet your criteria<p>
       <% else %>
+
+
+<table id="locations" class ="table1" cellspacing="0" width="100%">
+  <thead>
+  
   <tr>
-    <th><%= "Meetup events based on your interest -" + User.interest1 %></th>
+    <th><%= "Meetup events based on your interest" %></th>
     <th>Meetup Group Name</th>
-    <th>Description</th>
+    <th>Event Name</th>
     <th>Status</th>
   </tr>
   </thead>
 
 <body>
   <tr>
-      <% @meetup_grpname.each do |name| %>
-        <td> <%= name %></td>
-        <% @meetup_url.each do |url| %>
-        <% @meetup_desc.each do |description| %>
-           <td><%= link_to url, description, target: "_blank" %></td>
-            <% @meetup_status.each do |status| %>
-            <td><%= status %></td>
-        </tr>
+      <% meetups["results"].each do |meetup| %>
+        
+          <td><%= meetup["group"]["name"] %></td>
+        
+           <td><%= link_to meetup["name"], meetup["event_url"], target: "_blank" %></td>
+           <td><%= meetup["status"] %></td>
+  </tr>
+      
       <% end %>
-    <% end %>
-    <% end %>
-    <% end %>
+    
   </body>
 </table>
 <% end %>

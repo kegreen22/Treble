@@ -61,7 +61,7 @@ class HomeController < ApplicationController
   @hits = (@nytimes_data["response"]["meta"]["hits"]).to_i # article search hits
   puts @hits
   
-  @event_amt = (@nytimes_events["num_results"]).to_i # events hits
+  @event_amt = @nytimes_events["results"].length # events hits
   puts @event_amt
 
   @meetup_amt = @meetup_data["results"].length # meetup hits
