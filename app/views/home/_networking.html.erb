@@ -4,15 +4,14 @@
   <div class='span0 well text-center'>
 
  <% if meetups.blank? %>
-    <p>No meetups meet your criteria<p>
+    <p class="intro_text">No meetups meet your criteria<p>
       <% else %>
 
-
-<table id="locations" class ="table1" cellspacing="0" width="100%">
+<p>Meetup events based on your interest</p>
+<table cellspacing="0" width="85%" class="table table-striped">
   <thead>
   
   <tr>
-    <th><%= "Meetup events based on your interest" %></th>
     <th>Meetup Group Name</th>
     <th>Event Name</th>
     <th>Status</th>

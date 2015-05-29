@@ -29,9 +29,12 @@
   <div class='well'>
   <h3>Welcome! </h3>
   <br>
-<h4>The weather at <%= current_user.city %><%= ", " %><%= current_user.state %> is currently <%= @weather_current %> degrees F.</h4>
+  <% if @weather_rpt['current_observation']['temp_f'].blank? %>
+    <p class="intro_text">Sorry, there is no weather information at this time</p>
+    <% else %>
+<h4 class="intro_text">The weather at <%= current_user.city %><%= ", " %><%= current_user.state %> is currently <%= @weather_rpt['current_observation']['temp_f'] %> degrees F.</h4>
 <br>
-
+<% end %>
 </div>
 </div>
 <br>
@@ -40,10 +43,10 @@
  <div role='tabpanel'>
   <ul class='nav nav-tabs'>
     <li class='<%= 'active' if params[:tab].nil? %>'>
-   <%= link_to "Top Stories", tab: nil %><span class="badge"><%= @top_stories1 %> </span></li>
+   <%= link_to "Top Stories", tab: nil %><class="badge"><%= @top_stories1 %> </li>
 
     <li class='<%= 'active' if params[:tab] == 'interests' %>'>
-    <%= link_to "News on your interests", tab: 'interests' %><span class="badge"><%= @hits %></span></li>
+    <%= link_to "News on your interests", tab: 'interests' %><class="badge"><%= @hits %></li>
     
     <li class='<%= 'active' if params[:tab] == 'meetup' %>'>
     <%= link_to "Meetup Networking Opportunities", tab: 'meetup' %><span class="badge"><%= @meetup_amt %></span></li>
