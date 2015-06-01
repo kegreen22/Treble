@@ -9,27 +9,27 @@ class HomeController < ApplicationController
   # get user interest from the database
   @user = current_user
   @interest_pre = @user.interest1
-  puts @user.slug
-  puts @user.interest1
+  #puts @user.slug
+  #puts @user.interest1
   @interest_pre = @interest_pre.gsub(/\s+/,'+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the article searches
-  puts @interest_pre
+  #puts @interest_pre
   @zipcode = @user.zipcode
-  puts current_user.zipcode
+  #puts current_user.zipcode
 
   @free_pre = @user.free_time  
   @free_pre = @free_pre.gsub(/\s+/,'+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the event searches
   # puts @free_pre 
 
-  @state_pre = "NY" 
+  @state_pre = @user.state.gsub(/\s+/,'_')
   @city_pre = @user.city.gsub(/\s+/,'_')
   # puts @city_pre
   # call api methods and insert interest into api call
 
   @testing = Date.today
-  @limit = @testing.days_ago(14)
+  @limit = @testing.days_ago(7)
   @begin_time = @limit.to_s
   @begin_time = @begin_time.gsub('-','')
-  puts @begin_time
+  #puts @begin_time
 
   @nytimes_data = data_retrieve("http://api.nytimes.com/svc/search/v2/articlesearch.json?&q=" + @interest_pre + "&begin_date=" + @begin_time + "&sort=newest&api-key=bd2d3da37f58e2247ab30155400fc222:3:67128716")
   @weather_rpt = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/conditions/q/" + @state_pre + "/" + @city_pre + ".json")
@@ -40,14 +40,36 @@ class HomeController < ApplicationController
 
    
   # determine how many results were returned
+  begin
   @hits = (@nytimes_data["response"]["meta"]["hits"]).to_i # article search hits
-    
+    rescue NoMethodError => e
+    @hits = 0
+  end
+
+  begin
   @event_amt = @nytimes_events["results"].length # events hits
-  
+  rescue NoMethodError => e
+    @event_amt = 0
+  end
+
+  begin
   @meetup_amt = @meetup_data["results"].length # meetup hits
-  
+  rescue NoMethodError => e
+    @meetup_amt = 0
+  end
+
+  begin
   @top_stories1 = (@nytimes_top["results"]).length # top stories hits
-  
+  rescue NoMethodError => e
+    @top_stories1 = 0
+  end
+
+  begin
+    @weather_rpt
+  rescue NoMethodError => e
+    @weather_rpt = {}
+  end
+
 
   # see the current temperature
   #@weather_current = @weather_rpt['current_observation']['temp_f']
@@ -67,10 +89,17 @@ end
   
   def data_retrieve(url_string)
     url = url_string  # open url 
-    data_read =open(url).read   # read the url
+    
+    begin
+      data_read =open(url).read   # read the url
+    rescue SocketError => e 
+      return {}
+    end
+
     @data_result = JSON.parse(data_read)  # parse JSON received from the api
 
     return @data_result #return parsed JSON data to an instance variable
+      
   end
 
 

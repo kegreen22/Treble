@@ -1,17 +1,8 @@
-<ul class="nav">
-  <li>
-    <%= link_to "Treble", root_path, :class => 'brand' %>
-  </li>
-  <li>
-    <%= link_to 'link', ''%>
-  </li>
-</ul>
 
-</div>
 
 
 <% if logged_in? %>
-<div class='btn-group nav_item'>
+<div class='btn-group nav_item text-right'>
                 <%= link_to('#', class: 'btn btn-primary dropdown-toggle', 'data-toggle' => 'dropdown') do %>
 <%= current_user.username %>  <span class='caret'></span> <% end %>
  

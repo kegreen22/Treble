@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user, :logged_in?, :require_user, :require_same 
- # use this to expose the methods below to all views and controllers :require_user, :require_same
+  # use this to expose the methods below to all views and controllers :require_user, :require_same
  
   def current_user
   # if there is a current user rtn that if not then rtn nil
