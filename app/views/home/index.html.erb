@@ -42,12 +42,12 @@
 <div class="intro_text">
 <div class="row" >
  <div role='tabpanel'>
-  <ul class='nav nav-tabs'>
+  <ul class='nav nav-tabs nav-justified'>
     <li class='<%= 'active' if params[:tab].nil? %>'>
-   <%= link_to "Top Stories", tab: nil %><class="badge"><%= @top_stories1 %> </li>
+   <%= link_to "Top Stories", tab: nil %><span class="badge"><%= @top_stories1 %> </li>
 
     <li class='<%= 'active' if params[:tab] == 'interests' %>'>
-    <%= link_to "News on your interests", tab: 'interests' %><class="badge"><%= @hits %></li>
+    <%= link_to "News on your interests", tab: 'interests' %><span class="badge"><%= @hits %></li>
     
     <li class='<%= 'active' if params[:tab] == 'meetup' %>'>
     <%= link_to "Meetup Networking Opportunities", tab: 'meetup' %><span class="badge"><%= @meetup_amt %></span></li>
