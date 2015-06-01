@@ -1,6 +1,6 @@
 
  <div class="well">
-<%= form_for @user do |f| %>
+<%= form_for :user do |f| %>
 <%= render 'layouts/errors', obj: @user %>
 
 
@@ -17,7 +17,6 @@
 
 <br>
 <p>Your Location</p>
-
 <div class="control-group">
 <%= label_tag :city %>
 <%= text_field_tag :city %>
