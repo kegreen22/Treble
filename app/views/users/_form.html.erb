@@ -1,6 +1,6 @@
 
  <div class="well">
-<%= form_for :user do |f| %>
+<%= form_for @user do |f| %>
 <%= render 'layouts/errors', obj: @user %>
 
 
@@ -9,46 +9,46 @@
 <%= f.text_field :username%>
 </div>
 
-
 <div class="control-group">
 <%= f.label :password %>
 <%= f.password_field :password %>
 </div>
 
+
 <br>
 <p>Your Location</p>
 <div class="control-group">
-<%= label_tag :city %>
-<%= text_field_tag :city %>
+<%= f.label :city %>
+<%= f.text_field :city %>
 </div>
 
 <div class="control-group">
-<%= label_tag :state %>
-<% states = {AK: "Alaska", AL: "Alabama", AR: "Arkansas", AZ: "Arizona", CA: "California", CO: "Colorado", CT: "Connecticut", DC: "District of Columbia", DE: "Delaware", FL: "Florida", GA: "Georgia", HI: "Hawaii", IA: "Iowa", ID: "Idaho", IL: "Illinois", IN: "Indiana", KS: "Kansas", KY: "Kentucky", LA: "Louisiana", MA: "Massachusetts", MD: "Maryland", ME: "Maine", MI: "Michigan", MN: "Minnesota", MO: "Missouri", MS: "Mississippi", MT: "Montana", NC: "North Carolina", ND: "North Dakota", NE: "Nebraska", NH: "New Hampshire", NJ: "New Jersey", NM: "New Mexico", NV: "Nevada", NY: "New York", OH: "Ohio", OK: "Oklahoma", OR: "Oregon", PA: "Pennsylvania", RI: "Rhode Island", SC: "South Carolina", SD: "South Dakota", TN: "Tennessee", TX: "Texas", UT: "Utah", VA: "Virginia", VT: "Vermont", WA: "Washington", WI: "Wisconsin", WV: "West Virginia", WY: "Wyoming"} %>
-<select name="form[state]">
-<% states.each do |k, v| %>
-<option value="<%= k %>"><%= v %></option>
+<%= f.label :state %>
+<%= f.select(:state) do %>
+  <% [['AK', "Alaska"], ['AL', "Alabama"], ['AR', "Arkansas"], ['AZ', "Arizona"], ['CA', "California"], ['CO', "Colorado"], ['CT', "Connecticut"], ['DC', "District of Columbia"], ['DE', "Delaware"], ['FL', "Florida"], ['GA', "Georgia"], ['HI', "Hawaii"], ['IA', "Iowa"], ['ID', "Idaho"], ['IL', "Illinois"], ['IN', "Indiana"], ['KS', "Kansas"], ['KY', "Kentucky"], ['LA', "Louisiana"], ['MA', "Massachusetts"], ['MD', "Maryland"], ['ME', "Maine"], ['MI', "Michigan"], ['MN', "Minnesota"], ['MO', "Missouri"], ['MS', "Mississippi"], ['MT', "Montana"], ['NC', "North Carolina"], ['ND', "North Dakota"], ['NE', "Nebraska"], ['NH', "New Hampshire"], ['NJ', "New Jersey"], ['NM', "New Mexico"], ['NV', "Nevada"], ['NY', "New York"], ['OH', "Ohio"], ['OK', "Oklahoma"], ['OR', "Oregon"], ['PA', "Pennsylvania"], ['RI', "Rhode Island"], ['SC', "South Carolina"], ['SD', "South Dakota"], ['TN', "Tennessee"], ['TX', "Texas"], ['UT', "Utah"], ['VA', "Virginia"], ['VT', "Vermont"], ['WA', "Washington"], ['WI', "Wisconsin"], ['WV', "West Virginia"], ['WY', "Wyoming"]].each do |s| %>
+<%= content_tag(:option, s.last, value: s.first)  %>
 <% end %>
-</select>
+<% end %>
 </div>
 
 <div class="control-group">
-<%= label_tag :zipcode %>
-<%= text_field_tag :zipcode %>
+<%= f.label :zipcode %>
+<%= f.text_field :zipcode %>
 </div>
 
 <br>
 <p>Your Interests</p>
 <div class="control-group">
-<%= label_tag :interest1, 'Your main interest' %>
-<%= text_field_tag :interest1 %>
+<%= f.label :interest1, 'Your main interest' %>
+<%= f.text_field :interest1 %>
 </div>
 
 <div class="control-group">
-<%= label_tag :free_time %>
-<%= text_field_tag :free_time %>
+<%= f.label :free_time %>
+<%= f.text_field :free_time %>
 </div>
 <br>
+
 
 
 <%= f.submit (@user.new_record? ? "Register" : "Update Profile"), class: "btn btn-success"  %>
