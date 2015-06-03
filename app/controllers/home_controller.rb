@@ -37,35 +37,38 @@ class HomeController < ApplicationController
 
    
   # determine how many results were returned and rescue if there is an error
-  begin
-  @hits = (@nytimes_data["response"]["meta"]["hits"]).to_i # article search hits
-    rescue NoMethodError => e
-    @hits = 0
+  if !@nytimes_data
+    @nytimes_data = {}
+    else
+    @nytimes_data
+  end
+ 
+  if @weather_rpt
+   @weather_rpt
+   else
+   @weather_rpt = {}
+   puts @weather_rpt
+ end
+ 
+  if !@meetup_data 
+  @meetup_data = {}
+  else
+  @meetup_data
   end
 
-  begin
-  @event_amt = @nytimes_events["results"].length # events hits
-  rescue NoMethodError => e
-    @event_amt = 0
+  if !@nytimes_top
+   @nytimes_top = {} 
+   else
+    @nytimes_top
   end
 
-  begin
-  @meetup_amt = @meetup_data["results"].length # meetup hits
-  rescue NoMethodError => e
-    @meetup_amt = 0
+  if !@nytimes_events 
+   @nytimes_events = {}
+   else
+    @nytimes_events
   end
 
-  begin
-  @top_stories1 = (@nytimes_top["results"]).length # top stories hits
-  rescue NoMethodError => e
-    @top_stories1 = 0
-  end
-
-  begin
-    @weather_rpt
-  rescue NoMethodError => e
-    @weather_rpt = {}
-  end
+  
 
 else
   render 'index'
