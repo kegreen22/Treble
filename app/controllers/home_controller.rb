@@ -37,39 +37,46 @@ class HomeController < ApplicationController
 
    
   # determine how many results were returned and rescue if there is an error
-  if !@nytimes_data
-    @nytimes_data = {}
-    else
+  @test_nytimes_data = @nytimes_data["response"].nil? rescue true
+    if @test_nytimes_data
+      @nytimes_data = Hash.new("que bubble desastre")
+      unless @test_nytimes_data
     @nytimes_data
+    end
   end
  
-  if @weather_rpt
-   @weather_rpt
-   else
-   @weather_rpt = {}
-   puts @weather_rpt
- end
+  @weather_test = @weather_rpt['current_observation']['temp_f'].nil? rescue true
+    if @weather_test
+      @weather_rpt = Hash.new("que bubble desastre")
+      unless @weather_test
+      @weather_rpt
+    end
+  end
  
-  if !@meetup_data 
-  @meetup_data = {}
-  else
-  @meetup_data
+  @test_meetup = @meetup_data.nil? rescue true
+    if @test_meetup
+      @meetup_data = Hash.new("que bubble desastre")
+      unless @test_meetup
+    @meetup_data
+    end
   end
 
-  if !@nytimes_top
-   @nytimes_top = {} 
-   else
+  @test_nytimes_top = @nytimes_top.nil? rescue true
+    if @test_nytimes_top
+      @nytimes_top = Hash.new("que bubble desastre")
+      unless @test_nytimes_top
     @nytimes_top
+    end
   end
 
-  if !@nytimes_events 
-   @nytimes_events = {}
-   else
-    @nytimes_events
+  @test_nytimes_events = @nytimes_events.nil? rescue true
+    if @test_nytimes_events
+      @nytimes_events = Hash.new("que bubble desastre")
+      unless @test_nytimes_events
+    @nytimes_data
+    end
   end
-
-  
-
+ 
 else
   render 'index'
 

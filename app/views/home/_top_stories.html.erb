@@ -1,9 +1,9 @@
 
 <div class='row'>
+<div class="center-block">
+  <div class='span0 well'>
 
-  <div class='span0 well text-center'>
-
-    <% if stories.empty? %>
+    <% if stories.has_value?("que bubble desastre") %>
     <p class="intro_text">There are no top stories at this time.<p>
       <% else %>
 
@@ -31,6 +31,6 @@
 </table>
 
 <% end %>
-
+</div>
 </div>
 </div>
