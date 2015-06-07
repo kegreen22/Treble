@@ -37,9 +37,10 @@ class HomeController < ApplicationController
 
    
   # determine how many results were returned and rescue if there is an error
+  @checker = 'tophat desastre warmsun'
   @test_nytimes_data = @nytimes_data["response"].nil? rescue true
     if @test_nytimes_data
-      @nytimes_data = Hash.new("que bubble desastre")
+      @nytimes_data = Hash.new(@checker)
       unless @test_nytimes_data
     @nytimes_data
     end
@@ -47,7 +48,7 @@ class HomeController < ApplicationController
  
   @weather_test = @weather_rpt['current_observation']['temp_f'].nil? rescue true
     if @weather_test
-      @weather_rpt = Hash.new("que bubble desastre")
+      @weather_rpt = Hash.new(@checker)
       unless @weather_test
       @weather_rpt
     end
@@ -55,7 +56,7 @@ class HomeController < ApplicationController
  
   @test_meetup = @meetup_data.nil? rescue true
     if @test_meetup
-      @meetup_data = Hash.new("que bubble desastre")
+      @meetup_data = Hash.new(@checker)
       unless @test_meetup
     @meetup_data
     end
@@ -63,7 +64,7 @@ class HomeController < ApplicationController
 
   @test_nytimes_top = @nytimes_top.nil? rescue true
     if @test_nytimes_top
-      @nytimes_top = Hash.new("que bubble desastre")
+      @nytimes_top = Hash.new(@checker)
       unless @test_nytimes_top
     @nytimes_top
     end
@@ -71,7 +72,7 @@ class HomeController < ApplicationController
 
   @test_nytimes_events = @nytimes_events.nil? rescue true
     if @test_nytimes_events
-      @nytimes_events = Hash.new("que bubble desastre")
+      @nytimes_events = Hash.new(@checker)
       unless @test_nytimes_events
     @nytimes_data
     end
