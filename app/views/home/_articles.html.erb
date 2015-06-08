@@ -19,7 +19,7 @@
 <body>
   <tr>
      <% interest["response"]["docs"].each do |article| %>
-    <td><%= article["pub_date"] %></td>
+    <td><%= article["pub_date"].to(9) %></td>
     
     <td><%= link_to (sanitize article["headline"]["main"]), article["web_url"], target: "_blank" %> </td>
       </tr>

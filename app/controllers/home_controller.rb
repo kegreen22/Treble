@@ -5,28 +5,19 @@ class HomeController < ApplicationController
 
   def index
 
-    if logged_in?
-  # get user interest from the database
+  if logged_in?
+  # get user from the database
   @user = current_user
-  @interest_pre = @user.interest1
  
-  @interest_pre = @interest_pre.gsub(/\s+/,'+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the article searches
+  @interest_pre = (@user.interest1).gsub(/\s+/,'+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the article searches
  
-  @zipcode = @user.zipcode
-  
-  @free_pre = @user.free_time  
-  @free_pre = @free_pre.gsub(/\s+/,'+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the event searches
-  
+  @free_pre = (@user.free_time).gsub(/\s+/,'+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the event searches
 
   @state_pre = @user.state.gsub(/\s+/,'_')
   @city_pre = @user.city.gsub(/\s+/,'_')
-  
-
-  @testing = Date.today
-  @limit = @testing.days_ago(7)
-  @begin_time = @limit.to_s
-  @begin_time = @begin_time.gsub('-','')
- 
+    
+  @limit = (Date.today).days_ago(7)
+  @begin_time = (@limit.to_s).gsub('-','')
 
   @nytimes_data = data_retrieve("http://api.nytimes.com/svc/search/v2/articlesearch.json?&q=" + @interest_pre + "&begin_date=" + @begin_time + "&sort=newest&api-key=bd2d3da37f58e2247ab30155400fc222:3:67128716")
   @weather_rpt = data_retrieve("http://api.wunderground.com/api/cfffe9ffeb7b662e/conditions/q/" + @state_pre + "/" + @city_pre + ".json")
