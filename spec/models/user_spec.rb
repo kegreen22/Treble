@@ -4,7 +4,7 @@ require 'rails_helper'
 describe User do
 # test no username
 it "is invalid without a username" do
-  john_doe = User.new(username: nil, password: 'imminent', )
+  john_doe = User.new(username: nil, password: 'imminent')
   john_doe.valid?
   expect(john_doe.errors[:username]).to include("can't be blank")
 end

@@ -8,14 +8,14 @@ class HomeController < ApplicationController
   if logged_in?
   # get user from the database
   @user = current_user
- 
+
   @interest_pre = (@user.interest1).gsub(/\s+/,'+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the article searches
- 
+
   @free_pre = (@user.free_time).gsub(/\s+/,'+') # add + symbol between each word if there are 2+ words to allow use in http searches - designates "or" in the event searches
 
   @state_pre = @user.state.gsub(/\s+/,'_')
   @city_pre = @user.city.gsub(/\s+/,'_')
-    
+
   @limit = (Date.today).days_ago(7)
   @begin_time = (@limit.to_s).gsub('-','')
 
@@ -26,9 +26,9 @@ class HomeController < ApplicationController
   @nytimes_top = data_retrieve("http://api.nytimes.com/svc/topstories/v1/home.json?api-key=799bb4a946ced430d7d8611ca957387b:8:67128716")
   @nytimes_events = data_retrieve("http://api.nytimes.com/svc/events/v2/listings.json?&query=" + @free_pre + "&limit=20&api-key=3484b827fcc7f7a5962abbf4b36fdfc4:19:67128716")
 
-   
+
   # determine how many results were returned and rescue if there is an error
-  @checker = 'tophat desastre warmsun'
+  @checker = 'there is an error in the response'  # error text
   @test_nytimes_data = @nytimes_data["response"].nil? rescue true
     if @test_nytimes_data
       @nytimes_data = Hash.new(@checker)
@@ -36,7 +36,7 @@ class HomeController < ApplicationController
     @nytimes_data
     end
   end
- 
+
   @weather_test = @weather_rpt['current_observation']['temp_f'].nil? rescue true
     if @weather_test
       @weather_rpt = Hash.new(@checker)
@@ -44,7 +44,7 @@ class HomeController < ApplicationController
       @weather_rpt
     end
   end
- 
+
   @test_meetup = @meetup_data.nil? rescue true
     if @test_meetup
       @meetup_data = Hash.new(@checker)
@@ -68,36 +68,32 @@ class HomeController < ApplicationController
     @nytimes_data
     end
   end
- 
+
 else
   render 'index'
 
 end
 
-
-
 end
 
   # assign json array info to variables
   def data_retrieve(url_string)
-    url = url_string  # open url 
-    
+    url = url_string  # open url
+
     begin
       data_read =open(url).read   # read the url
-    rescue SocketError => e 
+    rescue SocketError => e
       return {}
     end
 
     @data_result = JSON.parse(data_read)  # parse JSON received from the api
 
     return @data_result #return parsed JSON data to an instance variable
-      
+
   end
 
-
-
- 
-
   # end of class
-  
+
+# to do - pagination of results
+
   end
