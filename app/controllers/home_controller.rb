@@ -94,6 +94,6 @@ end
 
   # end of class
 
-# to do - pagination of results
+# to do - pagination of results, improve formatting
 
   end
