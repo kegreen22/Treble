@@ -2,30 +2,30 @@
 
   <div class='span0 well text-center'>
 
- <% if freetime.has_value?("tophat desastre warmsun") %>
+ <% if freetime.empty? %>
     <p class="intro_text">No events meet your criteria<p>
       <% else %>
-     
+
 
 <table id="locations" class ="table table-striped" cellspacing="0" width="100%">
   <thead>
   <tr>
     <th>"Event" </th>
     <th>Description</th>
-    
+
   </tr>
   </thead>
 
 <body>
   <tr>
       <% freetime["results"].each do |event| %>
-        
+
            <td><%= link_to event["event_name"], event["event_detail_url"], target: "_blank" %></td>
-            
+
             <td><%= sanitize event["web_description"] %></td>
      </tr>
-     
-    
+
+
     <% end %>
   </body>
 </table>

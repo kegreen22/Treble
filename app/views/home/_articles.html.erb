@@ -1,9 +1,9 @@
- 
+
  <div class='row'>
 
   <div class='span0 well text-center'>
 
- <% if interest.has_value?("tophat desastre warmsun") %>
+ <% if interest.has_value?(@checker) %>
     <p class="intro_text">No articles meet your criteria<p>
       <% else %>
 
@@ -20,12 +20,12 @@
   <tr>
      <% interest["response"]["docs"].each do |article| %>
     <td><%= article["pub_date"].to(9) %></td>
-    
+
     <td><%= link_to (sanitize article["headline"]["main"]), article["web_url"], target: "_blank" %> </td>
       </tr>
     <% end %>
-    
-    
+
+
   </body>
 </table>
 
@@ -33,5 +33,4 @@
 
 </div>
 </div>
-   
-    
+

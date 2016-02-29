@@ -3,7 +3,7 @@
 <div class="center-block">
   <div class='span0 well'>
 
-    <% if stories.has_value?("tophat desastre warmsun") %>
+    <% if stories.empty? %>
     <p class="intro_text">There are no top stories at this time.<p>
       <% else %>
 
@@ -11,7 +11,7 @@
 <table id="locations" class ="table1" cellspacing="0" width="75%">
   <thead>
   <tr>
-    
+
     <th>Today's Top Stories</th>
   </tr>
   </thead>
@@ -19,14 +19,14 @@
 <body>
   <tr>
     <% stories["results"].each do |result| %>
-              
-     
+
+
       <td><%= link_to result["title"], result["url"], target: "_blank" %></td>
       </tr>
-   
+
     <% end %>
-    
-    
+
+
   </body>
 </table>
 
