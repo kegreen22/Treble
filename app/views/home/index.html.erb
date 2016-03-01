@@ -1,6 +1,6 @@
 
 <% if !logged_in? %>
- 
+
 <div class="top_space"></div>
 
 
@@ -29,7 +29,7 @@
   <div class='well'>
   <h2 class="intro_text"><%= link_to Treble, root_path %></h2>
   <br>
-  <% if @weather_rpt.has_value?(@checker) %>
+  <% if @weather_rpt.has_key?("Error Condition Alpha") %>
     <p class="intro_text">Sorry, there is no weather information at this time</p>
     <% else %>
 <h4 class="intro_text">The weather at <%= current_user.city %><%= ", " %><%= current_user.state %> is currently <%= @weather_rpt['current_observation']['temp_f'] %> degrees F.</h4>
@@ -49,26 +49,26 @@
 
     <li class='<%= 'active' if params[:tab] == 'interests' %>'>
     <%= link_to "News on your interests", tab: 'interests' %><span class="badge"><%= (@nytimes_data["response"]["meta"]["hits"]).to_i %></li>
-    
+
     <li class='<%= 'active' if params[:tab] == 'meetup' %>'>
     <%= link_to "Meetup Networking Opportunities", tab: 'meetup' %><span class="badge"><%= @meetup_data["results"].length %></span></li>
-  
+
     <li class='<%= 'active' if params[:tab] == 'freetime' %>'>
     <%= link_to "Events for your free time", tab: 'freetime' %><span class="badge"><%= @nytimes_events["results"].length %> </span></li>
-    
+
   </ul>
 
   <% if params[:tab].nil? %>
   <%= render 'top_stories', stories: @nytimes_top %>
-  
+
   <% elsif params[:tab] == 'interests' %>
   <%= render 'home/articles', interest: @nytimes_data  %>
 
   <% elsif params[:tab] == 'meetup' %>
-  <%= render 'networking', meetups: @meetup_data %> 
+  <%= render 'networking', meetups: @meetup_data %>
 
   <% elsif params[:tab] == 'freetime' %>
-  <%= render 'events', freetime: @nytimes_events %>  
+  <%= render 'events', freetime: @nytimes_events %>
 
   <% end %>
 
